@@ -6,11 +6,14 @@ console.disableYellowBox = true;
 
 export default function App() {
 
+  const appId = '1167950023585231';
+
   const [isLoggedin, setLoggedinStatus] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isImageLoading, setImageLoadStatus] = useState(false);
 
   facebookLogIn = async () => {
+    await Facebook.initializeAsync(appId);
     try {
       const {
         type,
@@ -18,7 +21,7 @@ export default function App() {
         expires,
         permissions,
         declinedPermissions,
-      } = await Facebook.logInWithReadPermissionsAsync('1167950023585231', {
+      } = await Facebook.logInWithReadPermissionsAsync(appId, {
         permissions: ['public_profile'],
       });
       if (type === 'success') {
