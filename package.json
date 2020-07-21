@@ -1,0 +1,28 @@
+{
+  "name": "bidra_sammen",
+  "version": "1.0.0",
+  "description": "graduation project root",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jopemoma/Graduation-Project.git"
+  },
+  "author": "Cloud0x9",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jopemoma/Graduation-Project/issues"
+  },
+  "homepage": "https://github.com/jopemoma/Graduation-Project#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8"
+  }
+}
