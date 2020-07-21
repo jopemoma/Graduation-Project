@@ -5,7 +5,6 @@ import * as Facebook from 'expo-facebook';
 console.disableYellowBox = true;
 
 export default function App() {
-
   const appId = '1167950023585231';
 
   const [isLoggedin, setLoggedinStatus] = useState(false);
@@ -27,12 +26,17 @@ export default function App() {
       if (type === 'success') {
         // Get the user's name using Facebook's Graph API
         fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
-          .then(response => response.json())
-          .then(data => {
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('First data recieved', data);
+            console.log(JSON.stringify({ facebookId: data.id, name: data.name }));
+            fetch('/users')
+              .then((facebook) => console.log('Data fetched', facebook))
+              .catch((e) => console.log(e));
             setLoggedinStatus(true);
             setUserData(data);
           })
-          .catch(e => console.log(e))
+          .catch((e) => console.log(e));
       } else {
         // type === 'cancel'
       }
