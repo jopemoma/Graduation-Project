@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,78 +9,13 @@ import {
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { ip } from '../ip.json';
+import AuthContext from '../contexts';
 
 const ipAdress = `http://${ip}:3000/users`;
 const appId = '1167950023585231';
+const imgSrc = require('../assets/icon.png');
 
-const options = (id, name) => ({ method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"facebookId": id, "name": name }) });
-
-function updateUser(id, name) {
-  console.log('this is ip', ipAdress);
-  console.log('We are fetching', options(id,name));
-  fetch(ipAdress, options(id, name));
-}
-
-export default function FBLoginButton() {
-  const [userData, setUserData] = useState(null);
-  const [isImageLoading, setImageLoadStatus] = useState(false);
-
-  // eslint-disable-next-line no-undef
-  facebookLogIn = async () => {
-    await Facebook.initializeAsync(appId);
-    try {
-      const { type, token } = await Facebook.logInWithReadPermissionsAsync(appId, { permissions: ['public_profile'] });
-      if (type === 'success') {
-        fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
-          .then((response) => response.json())
-          .then((data) => {
-            updateUser(data.id, data.name);
-            setLoggedinStatus(true);
-            setUserData(data);
-          })
-          .catch((e) => console.log(e));
-      } else {
-        // type === 'cancel'
-      }
-    } catch ({ message }) {
-      alert(`Facebook Login Error: ${message}`);
-    }
-  }
-
-  // eslint-disable-next-line no-undef
-  logout = () => {
-    setLoggedinStatus(false);
-    setUserData(null);
-    setImageLoadStatus(false);
-  }
-
-  return (
-    isLoggedin ?
-      userData ?
-        <View style={styles.container}>
-          <Image
-            style={{ width: 200, height: 200, borderRadius: 50 }}
-            source={{ uri: userData.picture.data.url }}
-            onLoadEnd={() => setImageLoadStatus(true)} />
-          <ActivityIndicator size="large" color="#0000ff" animating={!isImageLoading} style={{ position: "absolute" }} />
-          <Text style={{ fontSize: 22, marginVertical: 10 }}>Hi {userData.name}!</Text>
-          <TouchableOpacity style={styles.logoutBtn} onPress={this.logout}>
-            <Text style={{ color: "#fff" }}>Logout</Text>
-          </TouchableOpacity>
-        </View> :
-        null
-      :      (
-      <View style={styles.container}>
-        <Image
-          style={{ width: 200, height: 200, borderRadius: 50, marginVertical: 20 }}
-          source={require("../assets/icon.png")} />
-        <TouchableOpacity style={styles.loginBtn} onPress={this.facebookLogIn}>
-          <Text style={{ color: "#fff" }}>Login with Facebook</Text>
-        </TouchableOpacity>
-      </View>
-)
-  );
-}
+const options = (id, name) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ facebookId: id, name }) });
 
 const styles = StyleSheet.create({
   container: {
@@ -104,3 +39,56 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
+
+function updateUser(id, name) {
+  console.log('this is ip', ipAdress);
+  console.log('We are fetching', options(id, name));
+  fetch(ipAdress, options(id, name));
+}
+
+export default function FBLoginButton() {
+  const userStateContext = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
+  const [isImageLoading, setImageLoadStatus] = useState(false);
+
+  const facebookLogIn = async () => {
+    await Facebook.initializeAsync(appId);
+    try {
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(appId, { permissions: ['public_profile'] });
+      if (type === 'success') {
+        fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
+          .then((response) => response.json())
+          .then((data) => {
+            updateUser(data.id, data.name);
+            userStateContext.setLoggedinStatus(true);
+            setUserData(data);
+          })
+          .catch((e) => console.log(e));
+      } else {
+        // type === 'cancel'
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+    }
+  };
+
+  const logout = () => {
+    userStateContext.setLoggedinStatus(false);
+    setUserData(null);
+    setImageLoadStatus(false);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Image
+        style={{
+          width: 200, height: 200, borderRadius: 50, marginVertical: 20,
+        }}
+        source={imgSrc}
+      />
+      <TouchableOpacity style={styles.loginBtn} onPress={facebookLogIn}>
+        <Text style={{ color: '#fff' }}>Login with Facebook</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}

@@ -9,10 +9,7 @@ import {
 } from 'react-native';
 
 export default function EventList() {
-  
   return (
-    <View>
-
-    </View>
-  )
+    <Text>It works. This is EventList.</Text>
+  );
 }
