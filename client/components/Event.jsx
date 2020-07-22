@@ -8,6 +8,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-export default function Event(props) {
-  return()
+export default function Event() {
+  return (<Text>Hello this es Event</Text>);
 }

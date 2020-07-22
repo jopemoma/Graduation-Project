@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import { Text, View } from 'react-native';
 import { fetchEvents } from '../backend';
 
 export default function EventList() {
@@ -16,6 +9,15 @@ export default function EventList() {
   }, []);
 
   return (
-    <Text>{eventState[0].title}</Text>
+    <>
+      <Text>Dette er oppdrag i ditt område:</Text>
+      {eventState.map((event) => (
+        <View key={event.id}>
+          <Text>{event.title}</Text>
+          <Text>{event.time}</Text>
+          <Text>{event.location}</Text>
+        </View>
+      ))}
+    </>
   );
 }

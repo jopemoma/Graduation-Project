@@ -31,18 +31,16 @@ const eventSchema = new mongoose.Schema({
 const EventList = mongoose.model('Events', eventSchema);
 
 
-const garbagePicking = new EventList({
-  title: 'Garbage Picking',
-  organization: 'Salt',
-  location: 'Slottsparken',
-  date: '23/07/2020',
-  time: '17:00',
-  description: 'Pick up trash, clean the park',
-  slotsRemaining: 7
+const redCross = new EventList({
+  title: 'Sign in new members',
+  organization: 'Red Cross',
+  location: 'This is a test',
+  date: '27/07/2020',
+  time: '11:00',
+  description: 'Getting new members',
+  slotsRemaining: 7,
 });
 
-garbagePicking.save(function (err) {
+redCross.save((err) => {
   if (err) return console.error(err);
 });
-
-

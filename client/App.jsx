@@ -19,7 +19,9 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           {isLoggedin ? (
-            <Stack.Screen name="Eventlist" component={EventList} />
+            <>
+              <Stack.Screen name="Eventlist" component={EventList} />
+            </>
           ) : (
             <Stack.Screen name="Login" component={FBLoginButton} />
           )}
