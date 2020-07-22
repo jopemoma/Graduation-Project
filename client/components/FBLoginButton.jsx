@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import * as Facebook from 'expo-facebook';
 
-console.disableYellowBox = true;
+const ipAdress = '192.168.0.4:3000';
+const appId = '1167950023585231';
+
+const options = (name, id) => ({ method: 'POST', body: { name, id } });
+
+function updateUser(id, name) {
+  fetch(ipAdress, options(id, name));
+}
 
 export default function App() {
-  const appId = '1167950023585231';
-
   const [isLoggedin, setLoggedinStatus] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isImageLoading, setImageLoadStatus] = useState(false);
 
+  // eslint-disable-next-line no-undef
   facebookLogIn = async () => {
     await Facebook.initializeAsync(appId);
     try {
-      const {
-        type,
-        token,
-        expires,
-        permissions,
-        declinedPermissions,
-      } = await Facebook.logInWithReadPermissionsAsync(appId, {
-        permissions: ['public_profile'],
-      });
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(appId, { permissions: ['public_profile'] });
       if (type === 'success') {
-        // Get the user's name using Facebook's Graph API
         fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
           .then((response) => response.json())
           .then((data) => {
-            console.log('First data recieved', data);
-            console.log(JSON.stringify({ facebookId: data.id, name: data.name }));
-            fetch('/users')
-              .then((facebook) => console.log('Data fetched', facebook))
-              .catch((e) => console.log(e));
+            updateUser(data.id, data.name);
             setLoggedinStatus(true);
             setUserData(data);
           })
@@ -45,6 +45,7 @@ export default function App() {
     }
   }
 
+  // eslint-disable-next-line no-undef
   logout = () => {
     setLoggedinStatus(false);
     setUserData(null);
@@ -66,15 +67,16 @@ export default function App() {
           </TouchableOpacity>
         </View> :
         null
-      :
-      <View style={styles.container}>
+      :      (
+<View style={styles.container}>
         <Image
           style={{ width: 200, height: 200, borderRadius: 50, marginVertical: 20 }}
-          source={require("./assets/icon.png")} />
+          source={require("../assets/icon.png")} />
         <TouchableOpacity style={styles.loginBtn} onPress={this.facebookLogIn}>
           <Text style={{ color: "#fff" }}>Login with Facebook</Text>
         </TouchableOpacity>
       </View>
+)
   );
 }
 
@@ -89,14 +91,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#4267b2',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 20
+    borderRadius: 20,
   },
   logoutBtn: {
     backgroundColor: 'grey',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    position: "absolute",
-    bottom: 0
+    position: 'absolute',
+    bottom: 0,
   },
 });
