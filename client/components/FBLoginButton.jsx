@@ -9,12 +9,13 @@ import {
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 
-const ipAdress = '192.168.0.4:3000';
+const ipAdress = 'http://192.168.0.21:3000/users';
 const appId = '1167950023585231';
 
-const options = (name, id) => ({ method: 'POST', body: { name, id } });
+const options = (id, name) => ({ method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"facebookId": id, "name": name }) });
 
 function updateUser(id, name) {
+  console.log('We are fetching', options(id,name));
   fetch(ipAdress, options(id, name));
 }
 
