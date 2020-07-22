@@ -18,11 +18,30 @@ const userSchema = new mongoose.Schema({
   name: String
 });
 
-const User = mongoose.model('User', userSchema);
+const eventSchema = new mongoose.Schema({
+  title: String, 
+  organization: String,
+  location: String, 
+  date: String,
+  time: String,
+  description: String,
+  slotsRemaining: Number 
+})
 
-const martin = new User({ name: 'Martin' });
+const EventList = mongoose.model('Events', eventSchema);
 
-martin.save(function (err) {
+
+const garbagePicking = new EventList({
+  title: 'Garbage Picking',
+  organization: 'Salt',
+  location: 'Slottsparken',
+  date: '23/07/2020',
+  time: '17:00',
+  description: 'Pick up trash, clean the park',
+  slotsRemaining: 7
+});
+
+garbagePicking.save(function (err) {
   if (err) return console.error(err);
 });
 

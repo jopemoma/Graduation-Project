@@ -8,13 +8,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
+import { ip } from '../ip.json';
 
-const ipAdress = 'http://192.168.0.21:3000/users';
+const ipAdress = `http://${ip}:3000/users`;
 const appId = '1167950023585231';
 
 const options = (id, name) => ({ method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"facebookId": id, "name": name }) });
 
 function updateUser(id, name) {
+  console.log('this is ip', ipAdress);
   console.log('We are fetching', options(id,name));
   fetch(ipAdress, options(id, name));
 }

@@ -31,12 +31,11 @@ function createUser(id, name) {
   });
 }
 
-app.get('/jorge', (req, res) => {
+app.get('/events', (req, res) => {
   res.send('HELLO');
 });
 
 app.post('/users', (req, res) => {
-  console.log(req.body);
   const { facebookId, name } = req.body;
   User.findOne({ facebookId }, (err, user) => {
     if (err) return res.sendStatus(500);
