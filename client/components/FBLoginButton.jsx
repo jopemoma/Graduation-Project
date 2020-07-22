@@ -22,7 +22,6 @@ function updateUser(id, name) {
 }
 
 export default function FBLoginButton() {
-  const [isLoggedin, setLoggedinStatus] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isImageLoading, setImageLoadStatus] = useState(false);
 
@@ -71,7 +70,7 @@ export default function FBLoginButton() {
         </View> :
         null
       :      (
-<View style={styles.container}>
+      <View style={styles.container}>
         <Image
           style={{ width: 200, height: 200, borderRadius: 50, marginVertical: 20 }}
           source={require("../assets/icon.png")} />
