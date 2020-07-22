@@ -23,6 +23,18 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('UserProfiles', userSchema);
 
+const eventSchema = new mongoose.Schema({
+  title: String,
+  organization: String,
+  location: String,
+  date: String,
+  time: String,
+  description: String,
+  slotsRemaining: Number,
+});
+
+const EventList = mongoose.model('Events', eventSchema);
+
 function createUser(id, name) {
   const newUser = new User({ facebookId: id, name });
   newUser.save((err) => {
@@ -32,7 +44,16 @@ function createUser(id, name) {
 }
 
 app.get('/events', (req, res) => {
-  res.send('HELLO');
+  // Connect to our db
+  // Find all events
+  // Send as response
+  EventList.find({}, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result);
+    }
+  });
 });
 
 app.post('/users', (req, res) => {

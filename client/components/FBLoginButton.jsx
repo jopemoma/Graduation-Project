@@ -13,7 +13,7 @@ import { ip } from '../ip.json';
 const ipAdress = `http://${ip}:3000/users`;
 const appId = '1167950023585231';
 
-const options = (id, name) => ({ method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"facebookId": id, "name": name }) });
+const options = (id, name) => ({ method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"facebookId": id, "name": name }) });
 
 function updateUser(id, name) {
   console.log('this is ip', ipAdress);
