@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,9 +7,15 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import { fetchEvents } from '../backend';
 
 export default function EventList() {
+  const [eventState, setEventState] = useState([{ title: 'Did not fetch' }]);
+  useEffect(() => {
+    fetchEvents(setEventState);
+  }, []);
+
   return (
-    <Text>It works. This is EventList.</Text>
+    <Text>{eventState[0].title}</Text>
   );
 }

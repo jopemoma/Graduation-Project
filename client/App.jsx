@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FBLoginButton from './components/FBLoginButton';
 import EventList from './components/EventList';
-import AuthContext from './contexts';
+import { AuthContext } from './contexts';
 
 const Stack = createStackNavigator();
 

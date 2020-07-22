@@ -8,14 +8,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
-import { ip } from '../ip.json';
-import AuthContext from '../contexts';
+import { AuthContext } from '../contexts';
+import { updateUser } from '../backend';
 
-const ipAdress = `http://${ip}:3000/users`;
 const appId = '1167950023585231';
 const imgSrc = require('../assets/icon.png');
-
-const options = (id, name) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ facebookId: id, name }) });
 
 const styles = StyleSheet.create({
   container: {
@@ -39,12 +36,6 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
-
-function updateUser(id, name) {
-  console.log('this is ip', ipAdress);
-  console.log('We are fetching', options(id, name));
-  fetch(ipAdress, options(id, name));
-}
 
 export default function FBLoginButton() {
   const userStateContext = useContext(AuthContext);
