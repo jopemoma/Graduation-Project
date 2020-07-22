@@ -9,5 +9,5 @@ import {
 } from 'react-native';
 
 export default function Event() {
-  return (<Text>Hello this es Event</Text>);
+  return (<Text>Hei! Dette er en event</Text>);
 }

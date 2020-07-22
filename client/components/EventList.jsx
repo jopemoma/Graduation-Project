@@ -1,23 +1,36 @@
+/* eslint-disable global-require */
 import React, { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text } from 'react-native';
+import { Card, Button, Icon } from 'react-native-elements';
 import { fetchEvents } from '../backend';
 
-export default function EventList() {
+export default function EventList({ navigation }) {
   const [eventState, setEventState] = useState([{ title: 'Did not fetch' }]);
   useEffect(() => {
     fetchEvents(setEventState);
   }, []);
 
   return (
-    <>
-      <Text>Dette er oppdrag i ditt område:</Text>
+    <ScrollView>
       {eventState.map((event) => (
-        <View key={event.id}>
-          <Text>{event.title}</Text>
-          <Text>{event.time}</Text>
-          <Text>{event.location}</Text>
-        </View>
+        <Card
+          title={event.title}
+          image={require('../assets/mock.png')}
+        >
+          <Text style={{ marginBottom: 10 }}>
+            {event.description}
+          </Text>
+          <Button
+            icon={<Icon name="code" color="#ffffff" />}
+            buttonStyle={{
+              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
+            }}
+            title="Bli med nå!"
+            onPress={() => navigation.push('Event')}
+            key={event.title}
+          />
+        </Card>
       ))}
-    </>
+    </ScrollView>
   );
 }
