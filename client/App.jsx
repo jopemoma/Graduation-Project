@@ -1,11 +1,17 @@
 import React from 'react';
 import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import FBLoginButton from './components/FBLoginButton';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <FBLoginButton />
-    </View>
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={FBLoginButton} />
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 }

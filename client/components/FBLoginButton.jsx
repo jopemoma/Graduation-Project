@@ -21,7 +21,7 @@ function updateUser(id, name) {
   fetch(ipAdress, options(id, name));
 }
 
-export default function App() {
+export default function FBLoginButton() {
   const [isLoggedin, setLoggedinStatus] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isImageLoading, setImageLoadStatus] = useState(false);
