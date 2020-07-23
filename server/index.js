@@ -38,7 +38,9 @@ app.post('/users', async (req, res) => {
 /* ------------------------------- AUTHENTICATE ------------------------------- */
 
 app.post('/authenticate', async (req, res) => {
-  res.json();
+  console.log('This is reqbody', req.body);
+  const credentials = (await db.authenticate(req.body))[0];
+  return credentials ? res.json({ result: true, organizationId: credentials.organizationId }) : res.json({ result: false, organizationId: '' });
 });
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));

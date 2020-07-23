@@ -11,6 +11,7 @@ export default function OrgLoginButton() {
     console.log('This is username', username);
     console.log('This is password', password);
     const authData = await authenticateUser(username, password);
+    console.log('This is the authdata', authData);
     // TODO: authData is { result: <boolean>, organizationId: X }
     //  set state according to result from authData
   };
@@ -19,6 +20,7 @@ export default function OrgLoginButton() {
     <>
       <Input
         placeholder="Brukernavn"
+        onChangeText={setUsername}
         leftIcon={{ type: 'font-awesome', name: 'user' }}
       />
 

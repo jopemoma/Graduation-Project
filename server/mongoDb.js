@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { User } = require('./schema/userSchema');
 const { EventList } = require('./schema/eventSchema');
 const { Orgs } = require('./schema/orgsSchema');
+const { Cred } = require('./schema/credSchema');
 require('dotenv').config();
 
 const userName = process.env.USERNAME;
@@ -45,9 +46,9 @@ async function fetchOrg(organizationId) {
 }
 
 // TODO: Connect with the credentials table.
-//  Check if username and password exists. Return true and org. id if it does.
 async function authenticate(data) {
-  const res = await Orgs.find(data);
+  const res = await Cred.find(data);
+  return res;
 }
 
 module.exports.connect = connect;
@@ -56,3 +57,4 @@ module.exports.isUser = isUser;
 module.exports.fetchEvents = fetchEvents;
 module.exports.fetchOrgs = fetchOrgs;
 module.exports.fetchOrg = fetchOrg;
+module.exports.authenticate = authenticate;
