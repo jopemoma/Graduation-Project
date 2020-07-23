@@ -17,7 +17,8 @@ export default function App() {
   const [isUser, setIsUserStatus] = useState(true);
   const [orgId, setOrgId] = useState(null);
   const [userId, setUserId] = useState(null);
-  const context = {
+
+  const authContext = {
     isLoggedin,
     setLoggedinStatus,
     isUser,
@@ -31,7 +32,7 @@ export default function App() {
   if (isLoggedin) {
     if (isUser) {
       return (
-        <AuthContext.Provider value={context}>
+        <AuthContext.Provider value={authContext}>
           <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen name="Eventlist" component={EventList} />
@@ -42,7 +43,7 @@ export default function App() {
       );
     }
     return (
-      <AuthContext.Provider value={context}>
+      <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="OrgPage" component={OrgPage} />
@@ -53,7 +54,7 @@ export default function App() {
     );
   }
   return (
-    <AuthContext.Provider value={context}>
+    <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} />

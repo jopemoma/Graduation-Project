@@ -56,11 +56,20 @@ async function createEvent(eventData) {
   return res;
 }
 
-module.exports.connect = connect;
-module.exports.createUser = createUser;
-module.exports.isUser = isUser;
-module.exports.fetchEvents = fetchEvents;
-module.exports.fetchOrgs = fetchOrgs;
-module.exports.fetchOrg = fetchOrg;
-module.exports.authenticate = authenticate;
-module.exports.createEvent = createEvent;
+async function addVolunteer(eventId, eventData) {
+  // eslint-disable-next-line max-len
+  const res = await Event.findOneAndUpdate(eventId, { $push: { volunteers: eventData }, $inc: { slotsRemaining: -1 } }, { new: true });
+  return res;
+}
+
+module.exports = {
+  connect,
+  createUser,
+  isUser,
+  fetchEvents,
+  fetchOrgs,
+  fetchOrg,
+  authenticate,
+  createEvent,
+  addVolunteer,
+};

@@ -24,7 +24,7 @@ export default function CreateEvent({ navigation }) {
       volunteers: [],
     };
     const response = await createEvent(eventData);
-    //ToDo check that the response is ok, give feedback and send organization to OrgPage
+    // TODO: check that the response is ok, give feedback and send organization to OrgPage
     navigation.push('OrgPage');
   };
 

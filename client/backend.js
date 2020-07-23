@@ -30,6 +30,11 @@ async function createEvent(eventData) {
   return response;
 }
 
+async function addUserToEvent(userId, eventId) {
+  const response = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ userId }))).json();
+  return response;
+}
+
 export {
-  updateUser, fetchEvents, authenticateUser, createEvent,
+  updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent,
 };

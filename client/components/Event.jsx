@@ -1,21 +1,28 @@
+/* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext } from '../contexts';
+import { addUserToEvent } from '../backend';
+
+const imgSrc = require('../assets/mock.png');
 
 export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);
+  const { event } = route.params;
 
   const joinEvent = async () => {
-    const userId = userStateContext.userId || '0';
-    
+    const userId = userStateContext.userId || '143616507442543';
+    // eslint-disable-next-line dot-notation
+    const response = await addUserToEvent(userId, event['_id']);
+    console.log('Response from joinEvent:', response);
+    //  TODO: Update event state so that correct number of slots remaining is shown.
   };
 
-  const { event } = route.params;
   return (
     <Card
       title={`${event.orgName} - ${event.title}`}
-      image={require('../assets/mock.png')}
+      image={imgSrc}
     >
       <Text style={{ marginBottom: 10 }}>
         {`${event.date} - ${event.time}`}
