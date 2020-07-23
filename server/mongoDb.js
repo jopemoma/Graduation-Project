@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { User } = require('./schema/userSchema');
-const { EventList } = require('./schema/eventSchema');
+const { Event } = require('./schema/eventSchema');
 const { Orgs } = require('./schema/orgsSchema');
 const { Cred } = require('./schema/credSchema');
 require('dotenv').config();
@@ -31,7 +31,7 @@ async function isUser(facebookId) {
 }
 
 async function fetchEvents() {
-  const res = await EventList.find();
+  const res = await Event.find();
   return res;
 }
 
@@ -45,9 +45,14 @@ async function fetchOrg(organizationId) {
   return res;
 }
 
-// TODO: Connect with the credentials table.
 async function authenticate(data) {
   const res = await Cred.find(data);
+  return res;
+}
+
+async function createEvent(eventData) {
+  const newEvent = new Event(eventData);
+  const res = await newEvent.save();
   return res;
 }
 
@@ -58,3 +63,4 @@ module.exports.fetchEvents = fetchEvents;
 module.exports.fetchOrgs = fetchOrgs;
 module.exports.fetchOrg = fetchOrg;
 module.exports.authenticate = authenticate;
+module.exports.createEvent = createEvent;

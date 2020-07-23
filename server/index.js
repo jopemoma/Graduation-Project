@@ -9,8 +9,14 @@ app.use(express.json());
 
 const port = 3000;
 
+/* ------------------------------- EVENTS ------------------------------- */
+
 app.get('/events', async (req, res) => {
   res.json(await db.fetchEvents());
+});
+
+app.post('/events', async (req, res) => {
+  res.json(await db.createEvent(req.body));
 });
 
 /* ------------------------------- ORGS ------------------------------- */

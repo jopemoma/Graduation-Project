@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
   title: String,
-  organization: String,
+  organizationId: String,
   location: String,
   date: String,
   time: String,
@@ -10,6 +10,6 @@ const eventSchema = new mongoose.Schema({
   slotsRemaining: Number,
 });
 
-const EventList = mongoose.model('Events', eventSchema);
+const Event = mongoose.model('Events', eventSchema);
 
-module.exports.EventList = EventList;
+module.exports.Event = Event;

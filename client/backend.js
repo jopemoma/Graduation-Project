@@ -4,6 +4,7 @@ const ipAdress = `http://${ip}:3000`;
 
 const options = (id, name) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ facebookId: id, name }) });
 const authenticateOptions = (username, password) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+const genericOptions = (data) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 
 function updateUser(id, name) {
   fetch(`${ipAdress}/users`, options(id, name));
@@ -24,4 +25,11 @@ async function authenticateUser(username, password) {
   return response;
 }
 
-export { updateUser, fetchEvents, authenticateUser };
+async function createEvent(eventData) {
+  const response = await (await fetch(`${ipAdress}/events`, genericOptions(eventData))).json();
+  return response;
+}
+
+export {
+  updateUser, fetchEvents, authenticateUser, createEvent,
+};
