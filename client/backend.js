@@ -10,8 +10,8 @@ function updateUser(id, name) {
 
 function fetchEvents(cb) {
   fetch(`${ipAdress}/events`)
-    .then(res => res.json())
-    .then(data => cb(data))
+    .then((res) => res.json())
+    .then((data) => cb(data))
     .catch(console.error);
 }
 

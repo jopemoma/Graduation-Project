@@ -5,7 +5,6 @@ import {
   View,
   Image,
   TouchableOpacity,
-  ActivityIndicator,
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { AuthContext } from '../contexts';
