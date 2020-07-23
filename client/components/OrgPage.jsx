@@ -1,6 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Button } from 'react-native-elements';
 
-export default function OrgPage() {
-  return (<Text>Hey this is orgs page</Text>);
+export default function OrgPage({ navigation }) {
+  return (
+    <Button title="Create Event" type="solid" onPress={() => navigation.push('CreateEvent')}/>
+  )
+  
 }

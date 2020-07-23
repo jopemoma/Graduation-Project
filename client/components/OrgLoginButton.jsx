@@ -12,6 +12,7 @@ export default function OrgLoginButton() {
   const authenticate = async () => {
     const authData = await authenticateUser(username, password);
     if (authData.result) {
+      userStateContext.setLoggedinStatus(true);
       userStateContext.setIsUserStatus(false);
       userStateContext.setOrgId(authData.organizationId);
     } else {

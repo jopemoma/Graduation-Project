@@ -6,6 +6,7 @@ import EventList from './components/EventList';
 import Event from './components/Event';
 import OrgPage from './components/OrgPage';
 import Home from './components/Home';
+import CreateEvent from './components/CreateEvent';
 import OrgLoginButton from './components/OrgLoginButton';
 import { AuthContext } from './contexts';
 
@@ -42,6 +43,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="orgPage" component={OrgPage} />
+            <Stack.Screen name="CreateEvent" component={CreateEvent} />
           </Stack.Navigator>
         </NavigationContainer>
       </AuthContext.Provider>
