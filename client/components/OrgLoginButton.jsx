@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
-
+import { authenticateUser } from '../backend';
 
 export default function OrgLoginButton() {
-  const authenticate = () => {
-  
-  }
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const authenticate = async () => {
+    console.log('This is username', username);
+    console.log('This is password', password);
+    const authData = await authenticateUser(username, password);
+    // TODO: authData is { result: <boolean>, organizationId: X }
+    //  set state according to result from authData
+  };
+
   return (
     <>
-      <Input 
-        ref={username}
+      <Input
         placeholder="Brukernavn"
+        onChangeText={setUsername}
         leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
       />
 
       <Input
-        ref={password}
         placeholder="Passord"
+        secureTextEntry
+        onChangeText={setPassword}
         leftIcon={
           <Icon name="user" size={24} color="black" />
         }
