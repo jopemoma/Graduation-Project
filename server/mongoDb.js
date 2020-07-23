@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { User } = require('./schema/userSchema');
 const { EventList } = require('./schema/eventSchema');
+const { Orgs } = require('./schema/orgsSchema');
 require('dotenv').config();
 
 const userName = process.env.USERNAME;
@@ -25,7 +26,7 @@ function createUser(id, name) {
 
 async function isUser(facebookId) {
   const res = await User.exists({ facebookId });
-  console.log(res);
+  return res;
 }
 
 async function fetchEvents() {
@@ -33,7 +34,19 @@ async function fetchEvents() {
   return res;
 }
 
+async function fetchOrgs() {
+  const res = await Orgs.find();
+  return res;
+}
+
+async function fetchOrg(organizationId) {
+  const res = await Orgs.find({ organizationId });
+  return res;
+}
+
 module.exports.connect = connect;
 module.exports.createUser = createUser;
 module.exports.isUser = isUser;
 module.exports.fetchEvents = fetchEvents;
+module.exports.fetchOrgs = fetchOrgs;
+module.exports.fetchOrg = fetchOrg;
