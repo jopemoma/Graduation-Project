@@ -7,13 +7,13 @@ export default function OrgLoginButton() {
     <>
       <Input
         placeholder="Brukernavn"
-        leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
+        leftIcon={{ type: 'font-awesome', name: 'user' }}
       />
 
       <Input
         placeholder="Passord"
         leftIcon={
-          <Icon name="user" size={24} color="black" />
+          <Icon name="key" size={24} color="black" />
         }
       />
     </>
