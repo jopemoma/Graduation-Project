@@ -2,24 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { createEvent } from '../backend';
 import { AuthContext } from '../contexts';
-/*
-Input:
-- title
-- location
-- description
-- time
-- date
- */
-
-/*
-title
-organizationId
-location
-date
-time
-description
-slotsRemaining
- */
 
 export default function CreateEvent() {
   const userStateContext = useContext(AuthContext);
@@ -31,7 +13,6 @@ export default function CreateEvent() {
   const [slotsRemaining, setSlotsRemaining] = useState('');
 
   const addEvent = async () => {
-    //  Call backend function
     const eventData = {
       title,
       organizationId: userStateContext.orgId,
