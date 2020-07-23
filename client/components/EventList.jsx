@@ -27,8 +27,8 @@ export default function EventList({ navigation }) {
             buttonStyle={{
               borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
             }}
-            title="Bli med nå!"
-            onPress={() => navigation.push('Event')}
+            title="Les mer!"
+            onPress={() => navigation.navigate('Event', { event })}
             key={event.title}
           />
         </Card>

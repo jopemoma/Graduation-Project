@@ -42,7 +42,7 @@ export default function App() {
       <AuthContext.Provider value={context}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="orgPage" component={OrgPage} />
+            <Stack.Screen name="OrgPage" component={OrgPage} />
             <Stack.Screen name="CreateEvent" component={CreateEvent} />
           </Stack.Navigator>
         </NavigationContainer>

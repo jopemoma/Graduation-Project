@@ -3,7 +3,7 @@ import { Input, Button } from 'react-native-elements';
 import { createEvent } from '../backend';
 import { AuthContext } from '../contexts';
 
-export default function CreateEvent() {
+export default function CreateEvent({ navigation }) {
   const userStateContext = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -23,7 +23,8 @@ export default function CreateEvent() {
       slotsRemaining,
     };
     const response = await createEvent(eventData);
-    console.log('This is response from add event:', response);
+    //ToDo check that the response is ok, give feedback and send organization to OrgPage
+    navigation.push('OrgPage');
   };
 
   return (
