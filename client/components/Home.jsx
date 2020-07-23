@@ -1,10 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import {
-  Button,
-} from 'react-native-elements';
-import { color } from 'react-native-reanimated';
 
 export default function Home({ navigation }) {
   return (
