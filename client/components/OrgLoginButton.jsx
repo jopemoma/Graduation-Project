@@ -1,26 +1,20 @@
 import React from 'react';
-
-import {
-  Input,
-  Icon,
-} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
 
 export default function OrgLoginButton() {
   return (
     <>
       <Input
-        placeholder="INPUT WITH ICON"
+        placeholder="Brukernavn"
         leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
       />
+
       <Input
-        placeholder="INPUT WITH CUSTOM ICON"
-        leftIcon={(
-          <Icon
-            name="user"
-            size={24}
-            color="black"
-          />
-      )}
+        placeholder="Passord"
+        leftIcon={
+          <Icon name="user" size={24} color="black" />
+        }
       />
     </>
   );
