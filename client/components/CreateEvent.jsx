@@ -23,7 +23,6 @@ slotsRemaining
 
 export default function CreateEvent() {
   const userStateContext = useContext(AuthContext);
-
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -35,7 +34,7 @@ export default function CreateEvent() {
     //  Call backend function
     const eventData = {
       title,
-      organizationId: 1,
+      organizationId: userStateContext.orgId,
       description,
       location,
       time,
