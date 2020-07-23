@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
+import { AuthContext } from '../contexts';
 
 export default function Event({ route, navigation }) {
+  const userStateContext = useContext(AuthContext);
+
+  const joinEvent = async () => {
+    const userId = userStateContext.userId || '0';
+    
+  };
+
   const { event } = route.params;
   return (
     <Card
@@ -27,8 +35,7 @@ export default function Event({ route, navigation }) {
           borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
         }}
         title="Bli med nå!"
-        onPress={() => console.log('You want to join, too bad')}
-        key={event.title}
+        onPress={joinEvent}
       />
     </Card>
   );

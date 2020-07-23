@@ -21,6 +21,7 @@ export default function CreateEvent({ navigation }) {
       time,
       date,
       slotsRemaining,
+      volunteers: [],
     };
     const response = await createEvent(eventData);
     //ToDo check that the response is ok, give feedback and send organization to OrgPage

@@ -16,6 +16,7 @@ export default function App() {
   const [isLoggedin, setLoggedinStatus] = useState(false);
   const [isUser, setIsUserStatus] = useState(true);
   const [orgId, setOrgId] = useState(null);
+  const [userId, setUserId] = useState(null);
   const context = {
     isLoggedin,
     setLoggedinStatus,
@@ -23,6 +24,8 @@ export default function App() {
     setIsUserStatus,
     orgId,
     setOrgId,
+    userId,
+    setUserId,
   };
 
   if (isLoggedin) {

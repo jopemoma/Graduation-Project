@@ -50,6 +50,7 @@ export default function FBLoginButton() {
           .then((response) => response.json())
           .then((data) => {
             updateUser(data.id, data.name);
+            userStateContext.setUserId(data.id);
             userStateContext.setLoggedinStatus(true);
             setUserData(data);
           })
