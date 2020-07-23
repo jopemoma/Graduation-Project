@@ -29,7 +29,7 @@ async function isUser(facebookId) {
 }
 
 async function fetchEvents() {
-  const res = await EventList.find({});
+  const res = await EventList.find();
   return res;
 }
 

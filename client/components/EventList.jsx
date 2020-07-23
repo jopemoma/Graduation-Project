@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable global-require */
 import React, { useState, useEffect } from 'react';
 import { ScrollView, Text } from 'react-native';
@@ -6,6 +7,7 @@ import { fetchEvents } from '../backend';
 
 export default function EventList({ navigation }) {
   const [eventState, setEventState] = useState([{ title: 'Did not fetch' }]);
+
   useEffect(() => {
     fetchEvents(setEventState);
   }, []);

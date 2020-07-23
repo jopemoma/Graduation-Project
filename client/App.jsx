@@ -4,12 +4,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FBLoginButton from './components/FBLoginButton';
 import EventList from './components/EventList';
 import Event from './components/Event';
+import Home from './components/Home';
+import OrgLoginButton from './components/OrgLoginButton';
 import { AuthContext } from './contexts';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isLoggedin, setLoggedinStatus] = useState(true);
+  const [isLoggedin, setLoggedinStatus] = useState(false);
   const context = {
     isLoggedin,
     setLoggedinStatus,
@@ -24,7 +26,11 @@ export default function App() {
               <Stack.Screen name="Event" component={Event} />
             </>
           ) : (
-            <Stack.Screen name="Login" component={FBLoginButton} />
+            <>
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="LoginUser" component={FBLoginButton} />
+              <Stack.Screen name="LoginOrganisation" component={OrgLoginButton} />
+            </>
           )}
         </Stack.Navigator>
       </NavigationContainer>

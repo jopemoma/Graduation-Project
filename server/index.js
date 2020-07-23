@@ -9,8 +9,8 @@ app.use(express.json());
 
 const port = 3000;
 
-app.get('/events', (req, res) => {
-  res.json(db.fetchEvents());
+app.get('/events', async (req, res) => {
+  res.json(await db.fetchEvents());
 });
 
 app.post('/users', async (req, res) => {
