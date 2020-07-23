@@ -11,7 +11,7 @@ import { AuthContext } from './contexts';
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isLoggedin, setLoggedinStatus] = useState(false);
+  const [isLoggedin, setLoggedinStatus] = useState(true);
   const context = {
     isLoggedin,
     setLoggedinStatus,

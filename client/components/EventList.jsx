@@ -16,7 +16,7 @@ export default function EventList({ navigation }) {
     <ScrollView>
       {eventState.map((event) => (
         <Card
-          title={event.title}
+          title={`${event.orgName} - ${event.title}`}
           image={require('../assets/mock.png')}
         >
           <Text style={{ marginBottom: 10 }}>

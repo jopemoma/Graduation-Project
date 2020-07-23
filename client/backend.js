@@ -8,11 +8,14 @@ function updateUser(id, name) {
   fetch(`${ipAdress}/users`, options(id, name));
 }
 
-function fetchEvents(cb) {
-  fetch(`${ipAdress}/events`)
-    .then((res) => res.json())
-    .then((data) => cb(data))
-    .catch(console.error);
+async function fetchEvents(cb) {
+  const events = await (await fetch(`${ipAdress}/events`)).json();
+  const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
+  const eventData = events.map((event) => ({
+    ...event,
+    orgName: orgs.filter((org) => (org.organizationId === event.organizationId))[0].name,
+  }));
+  cb(eventData);
 }
 
 export { updateUser, fetchEvents };
