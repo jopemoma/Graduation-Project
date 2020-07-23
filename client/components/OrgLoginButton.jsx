@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
 import { authenticateUser } from '../backend';
+import { AuthContext } from '../contexts';
 
 export default function OrgLoginButton() {
+  const userStateContext = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const authenticate = async () => {
-    console.log('This is username', username);
-    console.log('This is password', password);
     const authData = await authenticateUser(username, password);
-    console.log('This is the authdata', authData);
-    // TODO: authData is { result: <boolean>, organizationId: X }
-    //  set state according to result from authData
+    if (authData.result) {
+      userStateContext.setIsUserStatus(false);
+      userStateContext.setOrgId(authData.organizationId);
+    } else {
+      // TODO display error message to user
+      console.log('Wrong password or username');
+    }
   };
 
   return (
