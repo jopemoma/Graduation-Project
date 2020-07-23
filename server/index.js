@@ -13,6 +13,8 @@ app.get('/events', async (req, res) => {
   res.json(await db.fetchEvents());
 });
 
+/* ------------------------------- ORGS ------------------------------- */
+
 app.get('/orgs', async (req, res) => {
   res.json(await db.fetchOrgs());
 });
@@ -22,6 +24,8 @@ app.get('/orgs/:id', async (req, res) => {
   return organization ? res.json(organization) : res.status(404).end();
 });
 
+/* ------------------------------- USERS ------------------------------- */
+
 app.post('/users', async (req, res) => {
   const { facebookId, name } = req.body;
   if (db.isUser(facebookId)) {
@@ -29,6 +33,12 @@ app.post('/users', async (req, res) => {
   }
   db.createUser(facebookId, name);
   return res.sendStatus(201);
+});
+
+/* ------------------------------- AUTHENTICATE ------------------------------- */
+
+app.post('/authenticate', async (req, res) => {
+  res.json();
 });
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));

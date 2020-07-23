@@ -44,6 +44,12 @@ async function fetchOrg(organizationId) {
   return res;
 }
 
+// TODO: Connect with the credentials table.
+//  Check if username and password exists. Return true and org. id if it does.
+async function authenticate(data) {
+  const res = await Orgs.find(data);
+}
+
 module.exports.connect = connect;
 module.exports.createUser = createUser;
 module.exports.isUser = isUser;
