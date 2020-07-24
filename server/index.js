@@ -36,6 +36,7 @@ app.get('/orgs/:id', async (req, res) => {
 });
 
 app.get('/orgs/:organizationId/events', async (req, res) => {
+  console.log('this is req.params', req.params);
   res.json(await db.fetchEvents(req.params));
 });
 
@@ -55,6 +56,7 @@ app.post('/users', async (req, res) => {
 app.post('/authenticate', async (req, res) => {
   console.log('This is reqbody', req.body);
   const credentials = (await db.authenticate(req.body))[0];
+  console.log('this are credentials', credentials);
   return credentials ? res.json({ result: true, organizationId: credentials.organizationId }) : res.json({ result: false, organizationId: '' });
 });
 

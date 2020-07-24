@@ -42,16 +42,19 @@ export default function App() {
         </AuthContext.Provider>
       );
     }
-    return (
-      <AuthContext.Provider value={authContext}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="OrgPage" component={OrgPage} />
-            <Stack.Screen name="CreateEvent" component={CreateEvent} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </AuthContext.Provider>
-    );
+    if (orgId) {
+      return (
+        <AuthContext.Provider value={authContext}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name="OrgPage" component={OrgPage} />
+              <Stack.Screen name="CreateEvent" component={CreateEvent} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </AuthContext.Provider>
+      );
+    }
+    return null;
   }
   return (
     <AuthContext.Provider value={authContext}>
