@@ -10,9 +10,10 @@ const imgSrc = require('../assets/mock.png');
 export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);
   const { event } = route.params;
+  const { volunteers } = event; // [ '2343242' ]
+  const userId = userStateContext.userId || '143616507442543';
 
   const joinEvent = async () => {
-    const userId = userStateContext.userId || '143616507442543';
     // eslint-disable-next-line dot-notation
     const response = await addUserToEvent(userId, event['_id']);
     console.log('Response from joinEvent:', response);
@@ -43,6 +44,7 @@ export default function Event({ route, navigation }) {
         }}
         title="Bli med nå!"
         onPress={joinEvent}
+        disabled={event.slotsRemaining === '0' || volunteers.includes(userId)}
       />
     </Card>
   );
