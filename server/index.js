@@ -30,14 +30,13 @@ app.get('/orgs', async (req, res) => {
   res.json(await db.fetchOrgs());
 });
 
-app.get('/orgs/events/:organizationId', async (res, req) => {
-  console.log('in orgs/events, reqparams', req.params);
-  res.json(await db.fetchEvents(req.params));
-});
-
 app.get('/orgs/:id', async (req, res) => {
   const organization = (await db.fetchOrg(req.params.id))[0];
   return organization ? res.json(organization) : res.status(404).end();
+});
+
+app.get('/orgs/:organizationId/events', async (req, res) => {
+  res.json(await db.fetchEvents(req.params));
 });
 
 /* ------------------------------- USERS ------------------------------- */

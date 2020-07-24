@@ -11,9 +11,7 @@ function updateUser(id, name) {
 }
 
 async function fetchOrgEvent(orgId, cb) {
-  console.log('OrgId', orgId);
-  const events = await (await fetch(`${ipAdress}/orgs/events/${orgId}`)).json();
-  console.log('In fetchOrgEvents.events: ', events);
+  const events = await (await fetch(`${ipAdress}/orgs/${orgId}/events`)).json();
   cb(events);
 }
 

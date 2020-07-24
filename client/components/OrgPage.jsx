@@ -9,16 +9,16 @@ const imgSrc = require('../assets/mock.png');
 
 export default function OrgPage({ navigation }) {
   const userStateContext = useContext(AuthContext);
-  const [eventState, setEventState] = useState([{ title: 'Didn\'t work', organizationId: '0' }]);
+  const [orgEventState, setOrgEventState] = useState([{ title: 'Didn\'t work', organizationId: '0' }]);
 
   useEffect(() => {
-    fetchOrgEvent(userStateContext.orgId, setEventState);
+    fetchOrgEvent(userStateContext.orgId, setOrgEventState);
   }, []);
 
   return (
     <ScrollView>
       <Button title="Lag nytt arrangement" type="solid" onPress={() => navigation.push('CreateEvent')} />
-      {eventState.map((event) => (
+      {orgEventState.map((event) => (
         <Card
           title={`${event.title}`}
           image={imgSrc}
