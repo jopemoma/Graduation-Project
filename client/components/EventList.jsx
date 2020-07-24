@@ -1,23 +1,28 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable global-require */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { fetchEvents } from '../backend';
+import { EventContext } from '../contexts';
+
+const imgSrc = require('../assets/mock.png');
 
 export default function EventList({ navigation }) {
-  const [eventState, setEventState] = useState([{ title: 'Did not fetch' }]);
+  const eventStateContext = useContext(EventContext);
 
   useEffect(() => {
-    fetchEvents(setEventState);
+    fetchEvents(eventStateContext.setEventState);
   }, []);
+
+  if (!eventStateContext.eventState) return null;
 
   return (
     <ScrollView>
-      {eventState.map((event) => (
+      {eventStateContext.eventState.map((event) => (
         <Card
           title={`${event.orgName} - ${event.title}`}
-          image={require('../assets/mock.png')}
+          image={imgSrc}
         >
           <Text style={{ marginBottom: 10 }}>
             {event.description}

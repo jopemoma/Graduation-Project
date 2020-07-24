@@ -8,7 +8,7 @@ import OrgPage from './components/OrgPage';
 import Home from './components/Home';
 import CreateEvent from './components/CreateEvent';
 import OrgLoginButton from './components/OrgLoginButton';
-import { AuthContext } from './contexts';
+import { AuthContext, EventContext } from './contexts';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +17,7 @@ export default function App() {
   const [isUser, setIsUserStatus] = useState(true);
   const [orgId, setOrgId] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [eventState, setEventState] = useState(null);
 
   const authContext = {
     isLoggedin,
@@ -29,16 +30,23 @@ export default function App() {
     setUserId,
   };
 
+  const eventContext = {
+    eventState,
+    setEventState,
+  };
+
   if (isLoggedin) {
     if (isUser) {
       return (
         <AuthContext.Provider value={authContext}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen name="EventList" component={EventList} />
-              <Stack.Screen name="Event" component={Event} />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <EventContext.Provider value={eventContext}>
+            <NavigationContainer>
+              <Stack.Navigator>
+                <Stack.Screen name="EventList" component={EventList} />
+                <Stack.Screen name="Event" component={Event} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </EventContext.Provider>
         </AuthContext.Provider>
       );
     }
