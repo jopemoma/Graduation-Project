@@ -56,7 +56,7 @@ export default function CreateEvent({ navigation }) {
       />
 
       <Button title="Create Event" type="solid" onPress={addEvent} />
-      <Button title="Back" type="solid" />
+      <Button title="Back" type="solid" onPress={() => navigation.navigate('OrgPage')} />
     </>
   );
 }
