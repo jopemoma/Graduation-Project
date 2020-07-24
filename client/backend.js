@@ -10,6 +10,13 @@ function updateUser(id, name) {
   fetch(`${ipAdress}/users`, options(id, name));
 }
 
+async function fetchOrgEvent(orgId, cb) {
+  console.log('OrgId', orgId);
+  const events = await (await fetch(`${ipAdress}/orgs/events/${orgId}`)).json();
+  console.log('In fetchOrgEvents.events: ', events);
+  cb(events);
+}
+
 async function fetchEvents(cb) {
   const events = await (await fetch(`${ipAdress}/events`)).json();
   const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
@@ -36,5 +43,5 @@ async function addUserToEvent(userId, eventId) {
 }
 
 export {
-  updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent,
+  updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
 };
