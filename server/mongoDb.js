@@ -33,8 +33,6 @@ async function isUser(facebookId) {
 // Filter === {} \\ { organizationId: x }
 async function fetchEvents(filter = {}) {
   const res = await Event.find(filter);
-  console.log('this filter', filter);
-  console.log('this is res', res);
   return res;
 }
 
