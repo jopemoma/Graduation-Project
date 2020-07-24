@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
 /* eslint-disable global-require */
 import React, { useEffect, useContext } from 'react';
@@ -21,6 +22,7 @@ export default function EventList({ navigation }) {
     <ScrollView>
       {eventStateContext.eventState.map((event) => (
         <Card
+          key={event['_id']}
           title={`${event.orgName} - ${event.title}`}
           image={imgSrc}
         >

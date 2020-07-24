@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext, EventContext } from '../contexts';
@@ -12,42 +12,46 @@ export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);
   const eventStateContext = useContext(EventContext);
 
-  // eslint-disable-next-line dot-notation
-  console.log('This is eventState in Event:', eventStateContext.eventState);
   const oldState = eventStateContext.eventState;
 
-  const currentEvent = eventStateContext
-    .eventState
-    .filter((event) => event['_id'] === route.params.event['_id'])[0];
+  // eslint-disable-next-line no-unused-vars
+  const [currentEventState, setCurrentEventState] = useState(oldState
+    .filter((event) => event['_id'] === route.params.event['_id'])[0]);
+
+  const getNewState = (prevState, response) => {
+    const eventIndex = prevState.findIndex((event) => event['_id'] === response['_id']);
+    const returnState = prevState;
+    returnState[eventIndex] = response;
+    console.log('This is the returnState from getNewState', returnState);
+    return returnState;
+  };
+
   const userId = userStateContext.userId || '143616507442543';
 
   const joinEvent = async () => {
-    console.log('Old state:', oldState);
     // eslint-disable-next-line dot-notation
-    const response = await addUserToEvent(userId, currentEvent['_id']);
-    const oldEventIndex = eventStateContext.eventState.findIndex((event) => event['_id'] === currentEvent['_id']);
-    console.log('Old event index', oldEventIndex);
-    const newState = oldState.splice(oldEventIndex, 1, response);
-    console.log('New state:', newState);
-    eventStateContext.setEventState([newState]);
+    const response = await addUserToEvent(userId, currentEventState['_id']);
+    setCurrentEventState(response);
+    eventStateContext.setEventState(getNewState(oldState, response));
   };
 
   return (
     <Card
-      title={`${currentEvent.orgName} - ${currentEvent.title}`}
+      key={currentEventState['_id']}
+      title={`${currentEventState.orgName} - ${currentEventState.title}`}
       image={imgSrc}
     >
       <Text style={{ marginBottom: 10 }}>
-        {`${currentEvent.date} - ${currentEvent.time}`}
+        {`${currentEventState.date} - ${currentEventState.time}`}
       </Text>
       <Text style={{ fontStyle: 'italic', marginBottom: 10 }}>
-        {`Hvor: ${currentEvent.location}`}
+        {`Hvor: ${currentEventState.location}`}
       </Text>
       <Text style={{ marginBottom: 10 }}>
-        {currentEvent.description}
+        {currentEventState.description}
       </Text>
       <Text style={{ color: 'green', marginBottom: 10 }}>
-        {`Plasser ledig nå ${currentEvent.slotsRemaining}`}
+        {`Plasser ledig nå ${currentEventState.slotsRemaining}`}
       </Text>
       <Button
         icon={<Icon name="code" color="#ffffff" />}
@@ -56,7 +60,8 @@ export default function Event({ route, navigation }) {
         }}
         title="Bli med nå!"
         onPress={joinEvent}
-        disabled={currentEvent.slotsRemaining === 0 || currentEvent.volunteers.includes(userId)}
+        disabled={currentEventState.slotsRemaining === 0
+          || currentEventState.volunteers.includes(userId)}
       />
       <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('EventList')} />
     </Card>

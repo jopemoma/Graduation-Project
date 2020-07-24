@@ -36,8 +36,13 @@ async function createEvent(eventData) {
 }
 
 async function addUserToEvent(userId, eventId) {
-  const response = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ userId }))).json();
-  return response;
+  const event = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ userId }))).json();
+  const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
+  const eventData = {
+    ...event,
+    orgName: orgs.filter((org) => (org.organizationId === event.organizationId))[0].name,
+  };
+  return eventData;
 }
 
 export {
