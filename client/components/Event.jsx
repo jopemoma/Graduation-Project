@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext } from '../contexts';
@@ -9,33 +9,35 @@ const imgSrc = require('../assets/mock.png');
 
 export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);
-  const { event } = route.params;
-  const { volunteers } = event; // [ '2343242' ]
+  const [userEventState, setUserEventState] = useState(route.params.event);
+  const { volunteers } = userEventState; // [ '2343242' ]
   const userId = userStateContext.userId || '143616507442543';
 
   const joinEvent = async () => {
     // eslint-disable-next-line dot-notation
-    const response = await addUserToEvent(userId, event['_id']);
+    const response = await addUserToEvent(userId, userEventState['_id']);
+    setUserEventState(response);
     console.log('Response from joinEvent:', response);
+    console.log('user event statet', userEventState);
     //  TODO: Update event state so that correct number of slots remaining is shown.
   };
 
   return (
     <Card
-      title={`${event.orgName} - ${event.title}`}
+      title={`${userEventState.orgName} - ${userEventState.title}`}
       image={imgSrc}
     >
       <Text style={{ marginBottom: 10 }}>
-        {`${event.date} - ${event.time}`}
+        {`${userEventState.date} - ${userEventState.time}`}
       </Text>
       <Text style={{ fontStyle: 'italic', marginBottom: 10 }}>
-        {`Hvor: ${event.location}`}
+        {`Hvor: ${userEventState.location}`}
       </Text>
       <Text style={{ marginBottom: 10 }}>
-        {event.description}
+        {userEventState.description}
       </Text>
       <Text style={{ color: 'green', marginBottom: 10 }}>
-        {`Plasser ledig nå ${event.slotsRemaining}`}
+        {`Plasser ledig nå ${userEventState.slotsRemaining}`}
       </Text>
       <Button
         icon={<Icon name="code" color="#ffffff" />}
@@ -44,8 +46,9 @@ export default function Event({ route, navigation }) {
         }}
         title="Bli med nå!"
         onPress={joinEvent}
-        disabled={event.slotsRemaining === '0' || volunteers.includes(userId)}
+        disabled={userEventState.slotsRemaining === 0 || volunteers.includes(userId)}
       />
+      <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('EventList')} />
     </Card>
   );
 }

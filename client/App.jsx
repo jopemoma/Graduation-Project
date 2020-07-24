@@ -13,7 +13,7 @@ import { AuthContext } from './contexts';
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isLoggedin, setLoggedinStatus] = useState(false);
+  const [isLoggedin, setLoggedinStatus] = useState(true);
   const [isUser, setIsUserStatus] = useState(true);
   const [orgId, setOrgId] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -35,7 +35,7 @@ export default function App() {
         <AuthContext.Provider value={authContext}>
           <NavigationContainer>
             <Stack.Navigator>
-              <Stack.Screen name="Eventlist" component={EventList} />
+              <Stack.Screen name="EventList" component={EventList} />
               <Stack.Screen name="Event" component={Event} />
             </Stack.Navigator>
           </NavigationContainer>
