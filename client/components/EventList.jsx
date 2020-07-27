@@ -25,14 +25,14 @@ export default function EventList({ navigation }) {
           key={event['_id']}
           title={`${event.orgName} - ${event.title}`}
           image={imgSrc}
+          titleNumberOfLines={2}
         >
           <Text style={{ marginBottom: 10 }}>
             {event.description}
           </Text>
           <Button
-            icon={<Icon name="code" color="#ffffff" />}
             buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
+              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#0F084B',
             }}
             title="Les mer!"
             onPress={() => navigation.navigate('Event', { event })}
