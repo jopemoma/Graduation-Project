@@ -14,6 +14,21 @@ export default function Event({ route, navigation }) {
 
   const oldState = eventStateContext.eventState;
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    image: {
+      marginTop: 50,
+    },
+    bottom: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      marginBottom: 36,
+    },
+  });
+
   // eslint-disable-next-line no-unused-vars
   const [currentEventState, setCurrentEventState] = useState(oldState
     .filter((event) => event['_id'] === route.params.event['_id'])[0]);
@@ -71,18 +86,3 @@ export default function Event({ route, navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  image: {
-    marginTop: 50,
-  },
-  bottom: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    marginBottom: 36,
-  },
-});

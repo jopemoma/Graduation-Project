@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { createEvent } from '../backend';
@@ -25,7 +26,7 @@ export default function CreateEvent({ navigation }) {
     };
     const response = await createEvent(eventData);
     // TODO: check that the response is ok, give feedback and send organization to OrgPage
-    navigation.push('OrgPage');
+    navigation.navigate('OrgPage');
   };
 
   return (
