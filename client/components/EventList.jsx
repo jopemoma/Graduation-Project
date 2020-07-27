@@ -13,7 +13,7 @@ export default function EventList({ navigation }) {
   const eventStateContext = useContext(EventContext);
 
   useEffect(() => {
-    fetchEvents(eventStateContext.setEventState);
+    // fetchEvents(eventStateContext.setEventState);
   }, []);
 
   if (!eventStateContext.eventState) return null;

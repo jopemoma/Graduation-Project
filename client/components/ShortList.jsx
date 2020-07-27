@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, ListItem } from 'react-native-elements';
 
-export default function ShortList({ headline, list }) {
+export default function ShortList({ onpress, headline, list }) {
   return (
     <Card title={headline} containerStyle={{ padding: 0 }}>
       { list.map((e) => (
@@ -12,6 +12,7 @@ export default function ShortList({ headline, list }) {
           roundAvatar
           title={e.title}
           avatar={{ uri: e.img }}
+          onPress={onpress(e)}
         />
       ))}
     </Card>

@@ -10,14 +10,14 @@ function updateUser(id, name) {
   fetch(`${ipAdress}/users`, options(id, name));
 }
 
-async function fetchOrgEvent(orgId, cb) {
-  const events = await (await fetch(`${ipAdress}/orgs/${orgId}/events`)).json();
+async function fetchOrgEvent(orgId, cb, options) {
+  const events = await (await fetch(`${ipAdress}/orgs/${orgId}/events`, options)).json();
   cb(events);
 }
 
-async function fetchEvents(callbacks) {
-  const events = await (await fetch(`${ipAdress}/events`)).json();
-  const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
+async function fetchEvents(callbacks, options) {
+  const events = await (await fetch(`${ipAdress}/events`, options)).json();
+  const orgs = await (await fetch(`${ipAdress}/orgs`, options)).json();
   const eventData = events.map((event) => ({
     ...event,
     orgName: orgs.filter((org) => (org.organizationId === event.organizationId))[0].name,

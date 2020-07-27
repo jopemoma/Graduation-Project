@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FBLoginButton from './components/FBLoginButton';
-import EventList from './components/EventList';
+// import EventList from './components/EventList';
 import Event from './components/Event';
 import OrgPage from './components/OrgPage';
 import Home from './components/Home';
@@ -10,9 +11,9 @@ import CreateEvent from './components/CreateEvent';
 import OrgLoginButton from './components/OrgLoginButton';
 import { AuthContext, EventContext } from './contexts';
 
-const Stack = createStackNavigator();
+import ListEvents from './components/ListEvents';
 
-console.disableYellowBox = true;
+const Stack = createStackNavigator();
 
 export default function App() {
   const [isLoggedin, setLoggedinStatus] = useState(true);
@@ -53,7 +54,9 @@ export default function App() {
                 },
               }}
               >
-                <Stack.Screen name="EventList" component={EventList} options={{ title: 'Aktiviteter i nærheten', headerTitleAlign: 'center' }} />
+                <Stack.Screen name="ListEvents">
+                  { (props) => <ListEvents {...props} type="short" /> }
+                </Stack.Screen>
                 <Stack.Screen name="Event" component={Event} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
               </Stack.Navigator>
             </NavigationContainer>
