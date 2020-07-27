@@ -4,7 +4,7 @@ import { Card, Button, Icon } from 'react-native-elements';
 import { fetchEvents, fetchOrgEvent } from '../backend';
 import { EventContext, AuthContext } from '../contexts';
 
-export default function ListEvents({ navigation }) {
+export default function ListEvents({ navigation }, props) {
   const eventStateContext = useContext(EventContext);
   const userStateContext = useContext(AuthContext);
 
@@ -17,4 +17,14 @@ export default function ListEvents({ navigation }) {
       fetchOrgEvent(userStateContext.orgId, setEventList);
     }
   }, []);
+
+  if (props.type === 'short') {
+    return (
+
+    );
+  } else {
+    return (
+
+    );
+  }
 }
