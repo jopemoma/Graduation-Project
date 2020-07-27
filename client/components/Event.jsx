@@ -23,7 +23,7 @@ export default function Event({ route, navigation }) {
     bottom: {
       flex: 1,
       justifyContent: 'flex-end',
-      marginBottom: 36,
+      marginBottom: 5,
     },
   });
 
@@ -47,11 +47,48 @@ export default function Event({ route, navigation }) {
     eventStateContext.setEventState(getNewState(oldState, response));
   };
 
+  if (userStateContext.isUser) {
+    return (
+      <View style={styles.container}>
+        <Card
+          key={currentEventState['_id']}
+          title={`${currentEventState.orgName} - ${currentEventState.name}`}
+          image={{ uri: currentEventState.img }}
+        >
+          <Text style={{ marginBottom: 10 }}>
+            {`${currentEventState.date} - ${currentEventState.time}`}
+          </Text>
+          <Text style={{ fontStyle: 'italic', marginBottom: 10 }}>
+            {`Hvor: ${currentEventState.location}`}
+          </Text>
+          <Text style={{ marginBottom: 10 }}>
+            {currentEventState.description}
+          </Text>
+          <Text style={{ color: 'green', marginBottom: 10 }}>
+            {`Plasser ledig nå ${currentEventState.slotsRemaining}`}
+          </Text>
+          <Button
+            icon={<Icon name="check" color="#ffffff" />}
+            buttonStyle={{
+              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
+            }}
+            title="Bli med nå!"
+            onPress={joinEvent}
+            disabled={currentEventState.slotsRemaining === 0
+                || currentEventState.volunteers.includes(userId)}
+          />
+        </Card>
+        <View style={styles.bottom}>
+          <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('ListEvents')} />
+        </View>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <Card
         key={currentEventState['_id']}
-        title={`${currentEventState.orgName} - ${currentEventState.title}`}
+        title={`${currentEventState.orgName} - ${currentEventState.name}`}
         image={{ uri: currentEventState.img }}
       >
         <Text style={{ marginBottom: 10 }}>
@@ -64,21 +101,36 @@ export default function Event({ route, navigation }) {
           {currentEventState.description}
         </Text>
         <Text style={{ color: 'green', marginBottom: 10 }}>
-          {`Plasser ledig nå ${currentEventState.slotsRemaining}`}
+          {`Ledige plasser ${currentEventState.slotsRemaining}`}
         </Text>
         <Button
-          icon={<Icon name="check" color="#ffffff" />}
+          buttonStyle={{
+            borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
+          }}
+          onPress={() => navigation.navigate('ListVolunteers', { currentEventState })}
+          title="Se deltagere"
+        />
+        <Button
+          buttonStyle={{
+            borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
+          }}
+          title="Endre eventdetaljer"
+        />
+        <Button
+          buttonStyle={{
+            borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
+          }}
+          title="Se søkere"
+        />
+        <Button
           buttonStyle={{
             borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
           }}
-          title="Bli med nå!"
-          onPress={joinEvent}
-          disabled={currentEventState.slotsRemaining === 0
-            || currentEventState.volunteers.includes(userId)}
+          title="Slett arrangement"
         />
       </Card>
       <View style={styles.bottom}>
-        <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('ListEvent')} />
+        <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('ListEvents')} />
       </View>
     </View>
   );

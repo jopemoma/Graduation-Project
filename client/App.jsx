@@ -4,13 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FBLoginButton from './components/FBLoginButton';
 import Event from './components/Event';
-import OrgEvent from './components/OrgEvent';
 import Home from './components/Home';
 import CreateEvent from './components/CreateEvent';
+import ListEvents from './components/ListEvents';
+import ListVolunteers from './components/ListVolunteers';
 import OrgLoginButton from './components/OrgLoginButton';
 import { AuthContext, EventContext } from './contexts';
-
-import ListEvents from './components/ListEvents';
 
 const Stack = createStackNavigator();
 
@@ -72,7 +71,10 @@ export default function App() {
                 <Stack.Screen name="ListEvents">
                   { (props) => <ListEvents {...props} type="short" /> }
                 </Stack.Screen>
-                <Stack.Screen name="OrgEvent" component={OrgEvent} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
+                <Stack.Screen name="ListVolunteers">
+                  { (props) => <ListVolunteers {...props} type="short" /> }
+                </Stack.Screen>
+                <Stack.Screen name="Event" component={Event} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
                 <Stack.Screen name="CreateEvent" component={CreateEvent} />
               </Stack.Navigator>
             </NavigationContainer>

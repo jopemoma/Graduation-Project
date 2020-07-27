@@ -10,7 +10,7 @@ export default function LongList({ navigation, navigateTo, list }) {
       { list.map((e) => (
         <Card
           key={e['_id']}
-          title={`${e.orgName} - ${e.title}`}
+          title={`${e.orgName} - ${e.name}`}
           titleNumberOfLines={2}
           image={{ uri: e.img }}
         >
@@ -25,7 +25,7 @@ export default function LongList({ navigation, navigateTo, list }) {
               borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#0F084B',
             }}
             title="Les mer!"
-            key={e.title}/>
+          />
         </Card>
       ))}
     </>
