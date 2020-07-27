@@ -6,9 +6,11 @@ const eventSchema = new mongoose.Schema({
   location: String,
   date: String,
   time: String,
+  img: String,
   description: String,
   slotsRemaining: Number,
   volunteers: Array,
+  pending: Array,
 });
 
 const Event = mongoose.model('Events', eventSchema);
