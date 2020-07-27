@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext, EventContext } from '../contexts';
@@ -29,9 +29,11 @@ export default function Event({ route, navigation }) {
     },
   });
 
+  useEffect(() => console.log(route), []);
+
   // eslint-disable-next-line no-unused-vars
   const [currentEventState, setCurrentEventState] = useState(oldState
-    .filter((event) => event['_id'] === route.params.event['_id'])[0]);
+    .filter((event) => event['_id'] === route.params.e['_id'])[0]);
 
   const getNewState = (prevState, response) => {
     const eventIndex = prevState.findIndex((event) => event['_id'] === response['_id']);

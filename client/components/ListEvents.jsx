@@ -11,17 +11,17 @@ import ShortList from './ShortList';
 export default function ListEvents({ navigation, type }) {
   const userStateContext = useContext(AuthContext);
   const eventStateContext = useContext(EventContext);
-  const controller = new AbortController();
+  // const controller = new AbortController();
 
   const [eventList, setEventList] = useState([{ title: 'Didn\'t work', organizationId: '0' }]);
 
   useEffect(() => {
     if (userStateContext.isUser) {
-      fetchEvents([eventStateContext.setEventState, setEventList], { signal: controller.signal });
+      fetchEvents([eventStateContext.setEventState, setEventList], /*{ signal: controller.signal }*/);
     } else {
-      fetchOrgEvent(userStateContext.orgId, setEventList, { signal: controller.signal });
+      fetchOrgEvent(userStateContext.orgId, setEventList, /*{ signal: controller.signal }*/);
     }
-    return () => controller.abort();
+    // return () => controller.abort();
   }, []);
 
   if (!eventList) return null;
@@ -30,8 +30,8 @@ export default function ListEvents({ navigation, type }) {
   return (
     <ScrollView>
       {type === 'short'
-        ? <ShortList headline="Arrangementer i ditt område" list={eventList} onpress={(e) => navigation.navigate('Event', { e })} />
-        : <LongList list={eventList} onpress={(e) => navigation.navigate('Event', { e })} />}
+        ? <ShortList headline="Arrangementer i ditt område" list={eventList} navigation={navigation} navigateTo="Event" />
+        : <LongList list={eventList} navigation={navigation} navigateTo="Event" />}
     </ScrollView>
   );
 }

@@ -4,27 +4,26 @@ import React from 'react';
 import { Text } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 
-export default function LongList({ onpress, list }) {
+export default function LongList({ navigation, navigateTo, list }) {
   return (
     <>
       { list.map((e) => (
         <Card
           key={e['_id']}
           title={`${e.orgName} - ${e.title}`}
-          image={e.img}
-          titleNumberOfLines={2}
-        >
+          titleNumberOfLines={2}>
+
           <Text style={{ marginBottom: 10 }}>
             {e.description}
           </Text>
+          
           <Button
+            onPress={() => navigation.navigate(navigateTo, { e })}
             buttonStyle={{
               borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#0F084B',
             }}
             title="Les mer!"
-            onPress={onpress(e)}
-            key={e.title}
-          />
+            key={e.title}/>
         </Card>
       ))}
     </>
