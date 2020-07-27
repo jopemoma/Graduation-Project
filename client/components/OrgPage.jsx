@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { Button, Card, Icon } from 'react-native-elements';
-import { fetchOrgEvent } from '../backend';
+import { fetchOrgEvent, fetchEvents } from '../backend';
 import { AuthContext } from '../contexts';
 
 const imgSrc = require('../assets/mock.png');

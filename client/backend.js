@@ -15,14 +15,17 @@ async function fetchOrgEvent(orgId, cb) {
   cb(events);
 }
 
-async function fetchEvents(cb) {
+async function fetchEvents(callbacks) {
   const events = await (await fetch(`${ipAdress}/events`)).json();
   const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
   const eventData = events.map((event) => ({
     ...event,
     orgName: orgs.filter((org) => (org.organizationId === event.organizationId))[0].name,
   }));
-  cb(eventData);
+
+  callbacks.forEach((cb) => {
+    cb(eventData);
+  });
 }
 
 async function authenticateUser(username, password) {
