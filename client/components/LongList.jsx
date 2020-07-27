@@ -11,12 +11,14 @@ export default function LongList({ navigation, navigateTo, list }) {
         <Card
           key={e['_id']}
           title={`${e.orgName} - ${e.title}`}
-          titleNumberOfLines={2}>
+          titleNumberOfLines={2}
+          image={{ uri: e.img }}
+        >
 
           <Text style={{ marginBottom: 10 }}>
             {e.description}
           </Text>
-          
+
           <Button
             onPress={() => navigation.navigate(navigateTo, { e })}
             buttonStyle={{

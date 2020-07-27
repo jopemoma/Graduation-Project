@@ -16,7 +16,7 @@ import ListEvents from './components/ListEvents';
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isLoggedin, setLoggedinStatus] = useState(true);
+  const [isLoggedin, setLoggedinStatus] = useState(false);
   const [isUser, setIsUserStatus] = useState(true);
   const [orgId, setOrgId] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -55,7 +55,7 @@ export default function App() {
               }}
               >
                 <Stack.Screen name="ListEvents">
-                  { (props) => <ListEvents {...props} type="short" /> }
+                  { (props) => <ListEvents {...props} type="long" /> }
                 </Stack.Screen>
                 <Stack.Screen name="Event" component={Event} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
               </Stack.Navigator>
@@ -67,12 +67,16 @@ export default function App() {
     if (orgId) {
       return (
         <AuthContext.Provider value={authContext}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen name="OrgPage" component={OrgPage} />
-              <Stack.Screen name="CreateEvent" component={CreateEvent} />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <EventContext.Provider value={eventContext}>
+            <NavigationContainer>
+              <Stack.Navigator>
+                <Stack.Screen name="ListEvents">
+                  { (props) => <ListEvents {...props} type="short" /> }
+                </Stack.Screen>
+                <Stack.Screen name="CreateEvent" component={CreateEvent} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </EventContext.Provider>
         </AuthContext.Provider>
       );
     }

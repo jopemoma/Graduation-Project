@@ -57,7 +57,7 @@ export default function Event({ route, navigation }) {
       <Card
         key={currentEventState['_id']}
         title={`${currentEventState.orgName} - ${currentEventState.title}`}
-        image={imgSrc}
+        image={{ uri: currentEventState.img }}
       >
         <Text style={{ marginBottom: 10 }}>
           {`${currentEventState.date} - ${currentEventState.time}`}
@@ -83,7 +83,7 @@ export default function Event({ route, navigation }) {
         />
       </Card>
       <View style={styles.bottom}>
-        <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('EventList')} />
+        <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('ListEvent')} />
       </View>
     </View>
   );
