@@ -25,12 +25,16 @@ function createUser(id, name) {
   });
 }
 
+async function fetchUser(facebookId) {
+  const res = await User.findOne({ facebookId });
+  return res;
+}
+
 async function isUser(facebookId) {
   const res = await User.exists({ facebookId });
   return res;
 }
 
-// Filter === {} \\ { organizationId: x }
 async function fetchEvents(filter = {}) {
   const res = await Event.find(filter);
   return res;
@@ -66,6 +70,7 @@ async function addVolunteer(eventId, eventData) {
 module.exports = {
   connect,
   createUser,
+  fetchUser,
   isUser,
   fetchEvents,
   fetchOrgs,

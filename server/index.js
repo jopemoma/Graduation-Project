@@ -41,6 +41,13 @@ app.get('/orgs/:organizationId/events', async (req, res) => {
 
 /* ------------------------------- USERS ------------------------------- */
 
+app.get('/users/:facebookId', async (req, res) => {
+  if (db.isUser(req.params.facebookId)) {
+    return res.send(await db.fetchUser(req.params.facebookId));
+  }
+  return res.sendStatus(404);
+});
+
 app.post('/users', async (req, res) => {
   const { facebookId, name } = req.body;
   if (db.isUser(facebookId)) {
