@@ -30,7 +30,7 @@ export default function ListEvents({ navigation, type }) {
   return (
     <ScrollView>
       {type === 'short'
-        ? <ShortList headline="Arrangementer i ditt område" list={eventList} navigation={navigation} navigateTo="Event" />
+        ? <ShortList headline="Arrangementer i ditt område" list={eventList} navigation={navigation} navigateTo="Event" />
         : <LongList list={eventList} navigation={navigation} navigateTo="Event" />}
     </ScrollView>
   );

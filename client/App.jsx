@@ -3,9 +3,8 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FBLoginButton from './components/FBLoginButton';
-// import EventList from './components/EventList';
 import Event from './components/Event';
-import OrgPage from './components/OrgPage';
+import OrgEvent from './components/OrgEvent';
 import Home from './components/Home';
 import CreateEvent from './components/CreateEvent';
 import OrgLoginButton from './components/OrgLoginButton';
@@ -73,6 +72,7 @@ export default function App() {
                 <Stack.Screen name="ListEvents">
                   { (props) => <ListEvents {...props} type="short" /> }
                 </Stack.Screen>
+                <Stack.Screen name="OrgEvent" component={OrgEvent} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
                 <Stack.Screen name="CreateEvent" component={CreateEvent} />
               </Stack.Navigator>
             </NavigationContainer>

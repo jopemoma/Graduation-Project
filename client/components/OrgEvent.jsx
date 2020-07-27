@@ -4,7 +4,6 @@ import React, { useContext, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext, EventContext } from '../contexts';
-import { addUserToEvent } from '../backend';
 
 export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);
@@ -38,15 +37,6 @@ export default function Event({ route, navigation }) {
     return returnState;
   };
 
-  const userId = userStateContext.userId || '143616507442543';
-
-  const joinEvent = async () => {
-    // eslint-disable-next-line dot-notation
-    const response = await addUserToEvent(userId, currentEventState['_id']);
-    setCurrentEventState(response);
-    eventStateContext.setEventState(getNewState(oldState, response));
-  };
-
   return (
     <View style={styles.container}>
       <Card
@@ -72,7 +62,7 @@ export default function Event({ route, navigation }) {
             borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
           }}
           title="Bli med nå!"
-          onPress={joinEvent}
+          onPress={}
           disabled={currentEventState.slotsRemaining === 0
             || currentEventState.volunteers.includes(userId)}
         />
