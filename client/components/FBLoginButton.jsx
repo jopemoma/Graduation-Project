@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
 export default function FBLoginButton() {
   const userStateContext = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
-  const [isImageLoading, setImageLoadStatus] = useState(false);
 
   const facebookLogIn = async () => {
     await Facebook.initializeAsync(appId);
@@ -61,12 +60,6 @@ export default function FBLoginButton() {
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
-  };
-
-  const logout = () => {
-    userStateContext.setLoggedinStatus(false);
-    setUserData(null);
-    setImageLoadStatus(false);
   };
 
   return (

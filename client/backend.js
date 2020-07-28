@@ -22,7 +22,8 @@ async function acceptVolunteer(facebookId, eventId) {
 }
 
 async function rejectVolunteer(facebookId, eventId) {
-  console.log('Not implemented', facebookId);
+  const result = await (await fetch(`${ipAdress}/events/${eventId}`, updateOptions({ facebookId, action: 'reject' }))).json();
+  return result;
 }
 
 async function fetchOrgEvent(orgId, cb, options) {

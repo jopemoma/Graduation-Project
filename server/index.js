@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 const express = require('express');
 const db = require('./mongoDb');
 
@@ -17,11 +18,15 @@ app.get('/events', async (req, res) => {
 
 // TODO: Error testing -- making sure :id is correct and the update was successful.
 app.post('/events/:_id', async (req, res) => {
-  res.json(await db.addVolunteer(req.params, req.body.userId));
+  res.json(await db.addPending(req.params, req.body.userId));
 });
 
 app.post('/events', async (req, res) => {
   res.json(await db.createEvent(req.body));
+});
+
+app.put('/events/:_id', async (req, res) => {
+  res.json(await db.acceptVolunteer(req.params, req.body));
 });
 
 /* ------------------------------- ORGS ------------------------------- */

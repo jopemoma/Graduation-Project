@@ -47,6 +47,13 @@ export default function Event({ route, navigation }) {
     eventStateContext.setEventState(getNewState(oldState, response));
   };
 
+  const handleVolunteer = async (id, func) => {
+    // eslint-disable-next-line dot-notation
+    const response = await func(id, currentEventState['_id']);
+    setCurrentEventState(response);
+    eventStateContext.setEventState(getNewState(oldState, response));
+  };
+
   if (userStateContext.isUser) {
     return (
       <View style={styles.container}>
@@ -75,7 +82,8 @@ export default function Event({ route, navigation }) {
             title="Bli med nå!"
             onPress={joinEvent}
             disabled={currentEventState.slotsRemaining === 0
-                || currentEventState.volunteers.includes(userId)}
+                || currentEventState.volunteers.includes(userId)
+                || currentEventState.pending.includes(userId)}
           />
         </Card>
         <View style={styles.bottom}>
@@ -120,7 +128,11 @@ export default function Event({ route, navigation }) {
           buttonStyle={{
             borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
           }}
-          onPress={() => navigation.navigate('ListVolunteers', { list: currentEventState.pending, accept: (id) => acceptVolunteer(id, currentEventState['_id']), reject: (id) => rejectVolunteer(id, currentEventState['_id']) })}
+          onPress={() => navigation.navigate('ListVolunteers', {
+            list: currentEventState.pending,
+            accept: (id) => handleVolunteer(id, acceptVolunteer),
+            reject: (id) => handleVolunteer(id, rejectVolunteer),
+          })}
           title="Se søkere"
         />
         <Button

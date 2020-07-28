@@ -11,17 +11,15 @@ import ShortList from './ShortList';
 export default function ListEvents({ navigation, type }) {
   const userStateContext = useContext(AuthContext);
   const eventStateContext = useContext(EventContext);
-  // const controller = new AbortController();
 
   const [eventList, setEventList] = useState([{ title: 'Didn\'t work', organizationId: '0' }]);
 
   useEffect(() => {
     if (userStateContext.isUser) {
-      fetchEvents([eventStateContext.setEventState, setEventList], /*{ signal: controller.signal }*/);
+      fetchEvents([eventStateContext.setEventState, setEventList]);
     } else {
-      fetchOrgEvent(userStateContext.orgId, setEventList, /*{ signal: controller.signal }*/);
+      fetchOrgEvent(userStateContext.orgId, setEventList);
     }
-    // return () => controller.abort();
   }, []);
 
   if (!eventList) return null;

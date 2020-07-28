@@ -9,7 +9,6 @@ import LongList from './LongList';
 import ShortList from './ShortList';
 
 export default function ListVolunteers({ route, navigation, type }) {
-  /* const userStateContext = useContext(AuthContext); */
   const [userNameState, setUserNameState] = useState([{ _id: '1', name: 'Laster...', img: '' }]);
   const { accept, reject } = route.params;
 

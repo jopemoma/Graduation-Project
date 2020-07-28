@@ -40,6 +40,28 @@ async function fetchEvents(filter = {}) {
   return res;
 }
 
+async function acceptVolunteer(eventId, body) {
+  switch (body.action) {
+    case 'accept': {
+      const res = await Event.findOneAndUpdate(eventId, {
+        $pull: { pending: body.facebookId },
+        $push: { volunteers: body.facebookId },
+        $inc: { slotsRemaining: -1 },
+      }, { new: true });
+      return res;
+    }
+    case 'reject': {
+      const res = await Event.findOneAndUpdate(eventId, {
+        $pull: { pending: body.facebookId },
+      }, { new: true });
+      return res;
+    }
+    default:
+      console.log('Oops. Default case in acceptVolunteer.');
+      return null;
+  }
+}
+
 async function fetchOrgs() {
   const res = await Orgs.find();
   return res;
@@ -61,9 +83,9 @@ async function createEvent(eventData) {
   return res;
 }
 
-async function addVolunteer(eventId, eventData) {
+async function addPending(eventId, eventData) {
   // eslint-disable-next-line max-len
-  const res = await Event.findOneAndUpdate(eventId, { $push: { volunteers: eventData }, $inc: { slotsRemaining: -1 } }, { new: true });
+  const res = await Event.findOneAndUpdate(eventId, { $push: { pending: eventData } }, { new: true });
   return res;
 }
 
@@ -77,5 +99,6 @@ module.exports = {
   fetchOrg,
   authenticate,
   createEvent,
-  addVolunteer,
+  addPending,
+  acceptVolunteer,
 };
