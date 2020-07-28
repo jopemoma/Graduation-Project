@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext, EventContext } from '../contexts';
-import { addUserToEvent, acceptVolunteer, rejectVolunteer, cancelEvent } from '../backend';
+import { addUserToEvent, acceptVolunteer, rejectVolunteer, cancelEvent, fetchEvents } from '../backend';
 
 export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);
@@ -53,6 +53,12 @@ export default function Event({ route, navigation }) {
     setCurrentEventState(response);
     eventStateContext.setEventState(getNewState(oldState, response));
     return response;
+  };
+
+  const handleCancelEvent = async (id) => {
+    await cancelEvent(id);
+    await fetchEvents([eventStateContext.setEventState, setCurrentEventState], {});
+    navigation.navigate('ListEvents');
   };
 
   if (userStateContext.isUser) {
@@ -142,8 +148,7 @@ export default function Event({ route, navigation }) {
           }}
           title="Slett arrangement"
           onPress={() => {
-            cancelEvent(currentEventState['_id']);
-            navigation.navigate('ListEvents');
+            handleCancelEvent(currentEventState['_id']);
           }}
         />
       </Card>

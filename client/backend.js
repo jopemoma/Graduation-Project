@@ -41,10 +41,12 @@ async function fetchEvents(callbacks, options) {
   callbacks.forEach((cb) => {
     cb(eventData);
   });
+  return Promise.resolve();
 }
 
 async function cancelEvent(eventId) {
-  const result = await (await fetch(`${ipAdress}/events/${eventId}`, { method: 'DELETE' })).json();
+  const result = await fetch(`${ipAdress}/events/${eventId}`, { method: 'DELETE' });
+  return result;
 }
 
 async function authenticateUser(username, password) {
