@@ -7,20 +7,20 @@ import { Card, Button } from 'react-native-elements';
 export default function LongList({ navigation, navigateTo, list }) {
   return (
     <>
-      { list.map((e) => (
+      { list.map((li) => (
         <Card
-          key={e['_id']}
-          title={`${e.orgName} - ${e.name}`}
+          key={li['_id']}
+          title={`${li.orgName} - ${li.name}`}
           titleNumberOfLines={2}
-          image={{ uri: e.img }}
+          image={{ uri: li.img }}
         >
 
           <Text style={{ marginBottom: 10 }}>
-            {e.description}
+            {li.description}
           </Text>
 
           <Button
-            onPress={() => navigation.navigate(navigateTo, { e })}
+            onPress={() => navigation.navigate(navigateTo, { li })}
             buttonStyle={{
               borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#0F084B',
             }}

@@ -8,13 +8,13 @@ export default function ShortList({
 }) {
   return (
     <Card title={headline} containerStyle={{ padding: 0 }}>
-      { list.map((e) => (
+      { list.map((li) => (
         <ListItem
-          key={e['_id']}
+          key={li['_id']}
           roundAvatar
-          title={e.name}
-          avatar={{ uri: e.img }}
-          onPress={() => navigation.navigate(navigateTo, { e })}
+          title={li.name}
+          avatar={{ uri: li.img }}
+          onPress={() => navigation.navigate(navigateTo, { li })}
         />
       ))}
     </Card>

@@ -14,7 +14,7 @@ export default function ListVolunteers({ route, navigation, type }) {
 
   useEffect(() => {
     async function get() {
-      const userNames = await fetchUsers(route.params.currentEventState.volunteers);
+      const userNames = await fetchUsers(route.params.list);
       setUserNameState(userNames);
     }
     get();

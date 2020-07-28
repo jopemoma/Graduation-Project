@@ -29,7 +29,7 @@ export default function Event({ route, navigation }) {
 
   // eslint-disable-next-line no-unused-vars
   const [currentEventState, setCurrentEventState] = useState(oldState
-    .filter((event) => event['_id'] === route.params.e['_id'])[0]);
+    .filter((event) => event['_id'] === route.params.li['_id'])[0]);
 
   const getNewState = (prevState, response) => {
     const eventIndex = prevState.findIndex((event) => event['_id'] === response['_id']);
@@ -107,7 +107,7 @@ export default function Event({ route, navigation }) {
           buttonStyle={{
             borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
           }}
-          onPress={() => navigation.navigate('ListVolunteers', { currentEventState })}
+          onPress={() => navigation.navigate('ListVolunteers', { list: currentEventState.volunteers })}
           title="Se deltagere"
         />
         <Button
@@ -120,6 +120,7 @@ export default function Event({ route, navigation }) {
           buttonStyle={{
             borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
           }}
+          onPress={() => navigation.navigate('ListVolunteers', { list: currentEventState.pending, pending: true })}
           title="Se søkere"
         />
         <Button
