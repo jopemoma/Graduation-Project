@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import FBLoginButton from './components/FBLoginButton';
 import Home from './components/Home';
 import StackListEvents from './components/Stack/StackListEvents';
@@ -44,9 +47,26 @@ export default function App() {
         <AuthContext.Provider value={authContext}>
           <EventContext.Provider value={eventContext}>
             <NavigationContainer>
-              <Tab.Navigator>
+              <Tab.Navigator
+                screenOptions={({ route }) => ({
+                  tabBarIcon: ({ focused, color, size }) => {
+                    if (route.name === 'TabListEvents') {
+                      return (
+                        <MaterialIcons name="event-available" size={size} color={color} />
+                      );
+                    }
+                    return (
+                      <Ionicons name={focused ? 'ios-list-box' : 'ios-list'} size={size} color={color} />
+                    );
+                  },
+                })}
+                tabBarOptions={{
+                  activeTintColor: '#D62246',
+                  inactiveTintColor: 'gray',
+                }}
+              >
                 <Tab.Screen name="TabListEvents" component={StackListEvents} options={{ title: 'Arrangementer' }} />
-                <Tab.Screen name="TabMyEvents" component={StackMyEvents} options={{ title: 'Påmeldinger' }}/>
+                <Tab.Screen name="TabMyEvents" component={StackMyEvents} options={{ title: 'Påmeldinger' }} />
               </Tab.Navigator>
             </NavigationContainer>
           </EventContext.Provider>

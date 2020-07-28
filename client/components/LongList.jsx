@@ -22,9 +22,10 @@ export default function LongList({ navigation, navigateTo, list }) {
           <Button
             onPress={() => navigation.navigate(navigateTo, { li })}
             buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#0F084B',
+              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#D4F4DD',
             }}
             title="Les mer!"
+            titleStyle={{ color: '#0E7C7B' }}
           />
         </Card>
       ))}
