@@ -120,7 +120,7 @@ export default function Event({ route, navigation }) {
           buttonStyle={{
             borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
           }}
-          onPress={() => navigation.navigate('ListVolunteers', { list: currentEventState.pending, accept: (id) => acceptVolunteer(id), reject: (id) => rejectVolunteer(id) })}
+          onPress={() => navigation.navigate('ListVolunteers', { list: currentEventState.pending, accept: (id) => acceptVolunteer(id, currentEventState['_id']), reject: (id) => rejectVolunteer(id, currentEventState['_id']) })}
           title="Se søkere"
         />
         <Button

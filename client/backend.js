@@ -5,6 +5,7 @@ const ipAdress = `http://${ip}:3000`;
 const userOptions = (id, name) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ facebookId: id, name }) });
 const authenticateOptions = (username, password) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
 const genericOptions = (data) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+const updateOptions = (data) => ({ method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 
 function updateUser(id, name) {
   fetch(`${ipAdress}/users`, userOptions(id, name));
@@ -15,12 +16,13 @@ async function fetchUsers(volunteerList) {
   return returnArray;
 }
 
-async function acceptVolunteer(facebookId) {
-  return 'Not implemented';
+async function acceptVolunteer(facebookId, eventId) {
+  const result = await (await fetch(`${ipAdress}/events/${eventId}`, updateOptions({ facebookId, action: 'accept' }))).json();
+  return result;
 }
 
-async function rejectVolunteer(facebookId) {
-  return 'Not implemented';
+async function rejectVolunteer(facebookId, eventId) {
+  console.log('Not implemented', facebookId);
 }
 
 async function fetchOrgEvent(orgId, cb, options) {
