@@ -31,8 +31,8 @@ async function deleteEvent(_id) {
   const swap = new EventDeleted(event);
   swap['_id'] = mongoose.Types.ObjectId();
   swap.isNew = true;
-  swap.save();
-  event.remove();
+  await swap.save();
+  await event.remove();
 }
 
 async function fetchUser(facebookId) {
