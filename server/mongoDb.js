@@ -1,6 +1,7 @@
+/* eslint-disable dot-notation */
 const mongoose = require('mongoose');
 const { User } = require('./schema/userSchema');
-const { Event } = require('./schema/eventSchema');
+const { Event, EventDeleted } = require('./schema/eventSchema');
 const { Orgs } = require('./schema/orgsSchema');
 const { Cred } = require('./schema/credSchema');
 require('dotenv').config();
@@ -23,6 +24,15 @@ function createUser(id, name) {
     if (err) return false;
     return true;
   });
+}
+
+async function deleteEvent(_id) {
+  const event = await Event.findOne({ _id });
+  const swap = new EventDeleted(event);
+  swap['_id'] = mongoose.Types.ObjectId();
+  swap.isNew = true;
+  swap.save();
+  event.remove();
 }
 
 async function fetchUser(facebookId) {
@@ -101,4 +111,5 @@ module.exports = {
   createEvent,
   addPending,
   acceptVolunteer,
+  deleteEvent,
 };

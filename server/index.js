@@ -29,6 +29,11 @@ app.put('/events/:_id', async (req, res) => {
   res.json(await db.acceptVolunteer(req.params, req.body));
 });
 
+app.delete('/events/:_id', async (req, res) => {
+  await db.deleteEvent(req.params);
+  res.sendStatus(200);
+});
+
 /* ------------------------------- ORGS ------------------------------- */
 
 app.get('/orgs', async (req, res) => {

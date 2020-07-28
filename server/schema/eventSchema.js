@@ -14,5 +14,7 @@ const eventSchema = new mongoose.Schema({
 });
 
 const Event = mongoose.model('Events', eventSchema);
+const EventDeleted = mongoose.model('deletedevents', eventSchema);
 
 module.exports.Event = Event;
+module.exports.EventDeleted = EventDeleted;
