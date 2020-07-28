@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FBLoginButton from './components/FBLoginButton';
 import Event from './components/Event';
 import Home from './components/Home';
@@ -9,9 +9,10 @@ import CreateEvent from './components/CreateEvent';
 import ListEvents from './components/ListEvents';
 import ListVolunteers from './components/ListVolunteers';
 import OrgLoginButton from './components/OrgLoginButton';
+import UserListEvents from './components/UserListEvents';
 import { AuthContext, EventContext } from './contexts';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [isLoggedin, setLoggedinStatus] = useState(false);
@@ -42,21 +43,9 @@ export default function App() {
         <AuthContext.Provider value={authContext}>
           <EventContext.Provider value={eventContext}>
             <NavigationContainer>
-              <Stack.Navigator screenOptions={{
-                headerStyle: {
-                  backgroundColor: '#C2E7D9',
-                },
-                headerTintColor: 'black',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
-              >
-                <Stack.Screen name="ListEvents">
-                  { (props) => <ListEvents {...props} type="long" /> }
-                </Stack.Screen>
-                <Stack.Screen name="Event" component={Event} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
-              </Stack.Navigator>
+              <Tab.Navigator>
+                <Tab.Screen name="UserListEvents" component={UserListEvents} />
+              </Tab.Navigator>
             </NavigationContainer>
           </EventContext.Provider>
         </AuthContext.Provider>
@@ -67,16 +56,16 @@ export default function App() {
         <AuthContext.Provider value={authContext}>
           <EventContext.Provider value={eventContext}>
             <NavigationContainer>
-              <Stack.Navigator>
-                <Stack.Screen name="ListEvents">
+              <Tab.Navigator>
+                <Tab.Screen name="ListEvents">
                   { (props) => <ListEvents {...props} type="short" /> }
-                </Stack.Screen>
-                <Stack.Screen name="ListVolunteers">
+                </Tab.Screen>
+                <Tab.Screen name="ListVolunteers">
                   { (props) => <ListVolunteers {...props} type="short" /> }
-                </Stack.Screen>
-                <Stack.Screen name="Event" component={Event} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
-                <Stack.Screen name="CreateEvent" component={CreateEvent} />
-              </Stack.Navigator>
+                </Tab.Screen>
+                <Tab.Screen name="Event" component={Event} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
+                <Tab.Screen name="CreateEvent" component={CreateEvent} />
+              </Tab.Navigator>
             </NavigationContainer>
           </EventContext.Provider>
         </AuthContext.Provider>
@@ -87,11 +76,11 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-          <Stack.Screen name="LoginUser" component={FBLoginButton} />
-          <Stack.Screen name="LoginOrganisation" component={OrgLoginButton} />
-        </Stack.Navigator>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Tab.Screen name="LoginUser" component={FBLoginButton} />
+          <Tab.Screen name="LoginOrganisation" component={OrgLoginButton} />
+        </Tab.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
   );
