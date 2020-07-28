@@ -15,6 +15,14 @@ async function fetchUsers(volunteerList) {
   return returnArray;
 }
 
+async function acceptVolunteer(facebookId) {
+  return 'Not implemented';
+}
+
+async function rejectVolunteer(facebookId) {
+  return 'Not implemented';
+}
+
 async function fetchOrgEvent(orgId, cb, options) {
   const events = await (await fetch(`${ipAdress}/orgs/${orgId}/events`, options)).json();
   cb(events);
@@ -54,5 +62,6 @@ async function addUserToEvent(userId, eventId) {
 }
 
 export {
-  updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent, fetchUsers,
+  updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
+  fetchUsers, acceptVolunteer, rejectVolunteer,
 };

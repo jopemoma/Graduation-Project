@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext, EventContext } from '../contexts';
-import { addUserToEvent } from '../backend';
+import { addUserToEvent, acceptVolunteer, rejectVolunteer } from '../backend';
 
 export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);
@@ -120,7 +120,7 @@ export default function Event({ route, navigation }) {
           buttonStyle={{
             borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
           }}
-          onPress={() => navigation.navigate('ListVolunteers', { list: currentEventState.pending, pending: true })}
+          onPress={() => navigation.navigate('ListVolunteers', { list: currentEventState.pending, accept: (id) => acceptVolunteer(id), reject: (id) => rejectVolunteer(id) })}
           title="Se søkere"
         />
         <Button

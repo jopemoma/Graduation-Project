@@ -11,6 +11,7 @@ import ShortList from './ShortList';
 export default function ListVolunteers({ route, navigation, type }) {
   /* const userStateContext = useContext(AuthContext); */
   const [userNameState, setUserNameState] = useState([{ _id: '1', name: 'Laster...', img: '' }]);
+  const { accept, reject } = route.params;
 
   useEffect(() => {
     async function get() {
@@ -23,7 +24,7 @@ export default function ListVolunteers({ route, navigation, type }) {
   return (
     <ScrollView>
       {type === 'short'
-        ? <ShortList headline="Deltagere" list={userNameState} navigation={navigation} navigateTo="Volunteer" />
+        ? <ShortList headline="Deltagere" accept={accept} reject={reject} list={userNameState} navigation={navigation} navigateTo="Volunteer" />
         : <LongList list={userNameState} navigation={navigation} navigateTo="Volunteer" />}
     </ScrollView>
   );
