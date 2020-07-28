@@ -52,6 +52,7 @@ export default function Event({ route, navigation }) {
     const response = await func(id, currentEventState['_id']);
     setCurrentEventState(response);
     eventStateContext.setEventState(getNewState(oldState, response));
+    return response;
   };
 
   if (userStateContext.isUser) {
