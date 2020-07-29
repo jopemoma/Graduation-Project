@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
 import FBLoginButton from './components/FBLoginButton';
 import Home from './components/Home';
 import StackListEvents from './components/Stack/StackListEvents';
@@ -94,9 +93,18 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <LoginStack.Navigator>
+        <LoginStack.Navigator screenOptions={{
+          headerStyle: {
+            backgroundColor: '#C2E7D9',
+          },
+          headerTintColor: '#143642',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        >
           <LoginStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-          <LoginStack.Screen name="LoginUser" component={FBLoginButton} />
+          <LoginStack.Screen name="LoginUser" component={FBLoginButton} options={{ title: 'Logg  inn med FaceBook', headerTitleAlign: 'center' }} />
           <LoginStack.Screen name="LoginOrganisation" component={OrgLoginButton} />
         </LoginStack.Navigator>
       </NavigationContainer>

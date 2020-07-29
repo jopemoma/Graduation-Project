@@ -20,21 +20,21 @@ export default function LongList({ navigation, navigateTo, list }) {
             {li.description}
           </Text>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <Button
-              onPress={() => navigation.navigate(navigateTo, { li })}
-              buttonStyle={{
-                borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#C2E7D9', width: 190,
-              }}
-              title="Ledige plasser!"
-              titleStyle={{ color: '#0E7C7B' }}
-            />
             <View>
-              <Badge value={li.slotsRemaining} status={li.slotsRemaining > 5 ? 'success' : 'warning'} />
-              <Text>{ li.slotsRemaining > 0 ? 'Ledig' : 'Fullt' }</Text>
+              <Button
+                onPress={() => navigation.navigate(navigateTo, { li })}
+                buttonStyle={{
+                  borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#C2E7D9', width: 190,
+                }}
+                title="Ledige plasser!"
+                titleStyle={{ color: '#0E7C7B' }}
+              />
+              <Badge containerStyle={{ position: 'relative', left: 90, top: -45 }} value={li.slotsRemaining} status={li.slotsRemaining > 5 ? 'success' : 'warning'} />
             </View>
           </View>
         </Card>
       ))}
     </>
+
   );
 }
