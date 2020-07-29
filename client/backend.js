@@ -90,5 +90,5 @@ async function addUserToEvent(userId, eventId) {
 
 export {
   createUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
-  fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent, fetchUserEvents,
+  fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent, fetchUserEvents, removeUserFromEvent,
 };
