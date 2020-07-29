@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import { Avatar } from 'react-native-elements';
+import React, { useEffect, useState } from '../../node_modules/react';
+import { Avatar } from '../../node_modules/react-native-elements';
 import { fetchUser } from '../../backend';
 
 export default function Profile({ route, navigation }) {

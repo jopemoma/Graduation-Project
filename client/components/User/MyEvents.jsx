@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext, useEffect } from 'react';
 import { ScrollView } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useState, useContext } from '../../node_modules/react';
+import { useFocusEffect } from '../../node_modules/@react-navigation/native';
 import { fetchUserEvents } from '../../backend';
 import { AuthContext } from '../../contexts';
-import ShortList from '../Common/ShortList';
+import ShortList from '../common/ShortList';
 
 export default function MyEvents({ navigation }) {
   const [confirmedEvents, setConfirmedEvents] = useState(null);

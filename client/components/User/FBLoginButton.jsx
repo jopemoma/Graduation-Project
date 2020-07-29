@@ -1,4 +1,3 @@
-import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +5,8 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import * as Facebook from 'expo-facebook';
+import React, { useState, useContext } from '../../node_modules/react';
+import * as Facebook from '../../node_modules/expo-facebook';
 import { AuthContext } from '../../contexts';
 import { createUser } from '../../backend';
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext } from 'react';
-import { Input, Button } from 'react-native-elements';
+import React, { useState, useContext } from '../../node_modules/react';
+import { Input, Button } from '../../node_modules/react-native-elements';
 import { createEvent } from '../../backend';
 import { AuthContext } from '../../contexts';
 
@@ -24,9 +24,10 @@ export default function CreateEvent({ navigation }) {
       slotsRemaining,
       volunteers: [],
     };
+    // eslint-disable-next-line no-unused-vars
     const response = await createEvent(eventData);
     // TODO: check that the response is ok, give feedback and send organization to OrgPage
-    navigation.navigate('OrgPage');
+    navigation.navigate('ListEvents');
   };
 
   return (

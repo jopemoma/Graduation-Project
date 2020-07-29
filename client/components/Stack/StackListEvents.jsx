@@ -1,7 +1,8 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import ListEvents from '../Common/ListEvents';
-import Event from '../Common/Event';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from '../../node_modules/react';
+import { createStackNavigator } from '../../node_modules/@react-navigation/stack';
+import ListEvents from '../common/events/ListEvents';
+import Event from '../common/events/Event';
 
 export default function StackListEvents() {
   const Stack = createStackNavigator();
