@@ -12,18 +12,6 @@ export default function MyEvents({ navigation }) {
   const [deniedEvents, setDeniedEvents] = useState(null);
   const userStateContext = useContext(AuthContext);
 
-  useEffect(() => {
-    fetchUserEvents(
-      [setConfirmedEvents],
-      (event) => event.volunteers.includes(userStateContext.userId),
-    );
-    fetchUserEvents(
-      [setPendingEvents],
-      (event) => event.pending.includes(userStateContext.userId),
-    );
-    console.log('this is rendering');
-  }, []);
-
   useFocusEffect(
     React.useCallback(() => {
       fetchUserEvents(

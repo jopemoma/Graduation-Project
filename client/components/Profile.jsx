@@ -4,8 +4,9 @@ import { ScrollView, View, Text } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { fetchUser } from '../backend';
 
-export default function Profile({ navigation, userId }) {
+export default function Profile({ route, navigation }) {
   const [profileState, setProfileState] = useState(null);
+  const userId = route.params.facebookId;
 
   useEffect(() => {
     async function get() {

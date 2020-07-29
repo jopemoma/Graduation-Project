@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Profile from '../Profile';
@@ -18,7 +19,9 @@ export default function StackMyEvents() {
     }}
     >
       <Stack.Screen name="Profile" options={{ title: 'Min profil', headerTitleAlign: 'center' }}>
-        {(props) => <Profile {...props} userId={userStateContext.userId} />}
+        {
+        (props) => <Profile {...props} route={{ params: { facebookId: userStateContext.userId } }} />
+        }
       </Stack.Screen>
     </Stack.Navigator>
   );
