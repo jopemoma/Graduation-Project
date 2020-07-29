@@ -9,6 +9,7 @@ import ShortList from '../common/ShortList';
 export default function MyEvents({ navigation }) {
   const [confirmedEvents, setConfirmedEvents] = useState(null);
   const [pendingEvents, setPendingEvents] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [deniedEvents, setDeniedEvents] = useState(null);
   const userStateContext = useContext(AuthContext);
 

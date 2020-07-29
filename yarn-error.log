@@ -1,0 +1,59 @@
+Arguments: 
+  /Users/øyvind.ege/.nvm/versions/node/v12.13.1/bin/node /Users/øyvind.ege/.nvm/versions/node/v12.13.1/bin/yarn global bin
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:./bin:/usr/local/sbin:/Users/øyvind.ege/.dotfiles/bin:/Users/øyvind.ege/.rbenv/shims:/Users/øyvind.ege/.nvm/versions/node/v12.13.1/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.13.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/øyvind.ege/Projects/Graduation-Project/package.json: Unexpected token } in JSON at position 192
+      at JSON.parse (<anonymous>)
+      at /Users/øyvind.ege/.nvm/versions/node/v12.13.1/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/øyvind.ege/.nvm/versions/node/v12.13.1/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /Users/øyvind.ege/.nvm/versions/node/v12.13.1/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "bidra_sammen",
+    "version": "1.0.0",
+    "description": "graduation project root",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jopemoma/Graduation-Project.git"
+    },
+    "author": "Cloud0x9",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/jopemoma/Graduation-Project/issues"
+    },
+    "homepage": "https://github.com/jopemoma/Graduation-Project#readme",
+    "dependencies": {},
+    "devDependencies": {
+      "eslint": "^7.5.0",
+      "eslint-config-airbnb": "^18.2.0",
+      "eslint-plugin-import": "^2.22.0",
+      "eslint-plugin-jsx-a11y": "^6.3.1",
+      "eslint-plugin-react": "^7.20.3",
+      "eslint-plugin-react-hooks": "^4.0.8",
+      "eslint-plugin-react-native": "^3.8.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
