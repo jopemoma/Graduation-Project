@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
@@ -84,9 +85,9 @@ export default function Event({ route, navigation }) {
             {`Plasser ledig nå ${currentEventState.slotsRemaining}`}
           </Text>
           <Button
-            icon={<Icon name="check" color="#ffffff" />}
+            icon={<Icon name="check" color="#ffffff" style={{ marginRight: 10 }} />}
             buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
+              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 20,
             }}
             title="Bli med nå!"
             onPress={joinEvent}
@@ -94,6 +95,17 @@ export default function Event({ route, navigation }) {
                 || currentEventState.volunteers.includes(userId)
                 || currentEventState.pending.includes(userId)}
           />
+          { currentEventState.volunteers.includes(userId) || currentEventState.pending.includes(userId)
+            ? (
+              <Button
+                icon={<Icon name="cancel" color="#ffffff" style={{ marginRight: 10 }} />}
+                buttonStyle={{
+                  borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: 'red',
+                }}
+                title="Trekk deg"
+                onPress={joinEvent}
+              />
+            ) : null}
         </Card>
         <View style={styles.bottom}>
           <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('ListEvents')} />

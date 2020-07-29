@@ -17,7 +17,7 @@ export default function StackMyEvents() {
     }}
     >
       <Stack.Screen name="MyEvents" component={MyEvents} options={{ title: 'Mine påmeldinger', headerTitleAlign: 'center' }} />
-      <Stack.Screen name="Event" component={Event} options={{ title: 'Detaljer Brage', headerTitleAlign: 'center' }} />
+      <Stack.Screen name="Event" component={Event} options={{ title: 'Detaljer', headerTitleAlign: 'center' }} />
     </Stack.Navigator>
   );
 }
