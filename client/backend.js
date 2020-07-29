@@ -2,12 +2,11 @@ import { ip } from './ip.json';
 
 const ipAdress = `http://${ip}:3000`;
 
-const userOptions = (data) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 const authenticateOptions = (username, password) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
-const genericOptions = (data, method) => ({ method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+const options = (data, method) => ({ method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 
 function createUser(data) {
-  fetch(`${ipAdress}/users`, userOptions(data));
+  fetch(`${ipAdress}/users`, options(data, 'POST'));
 }
 
 async function fetchUsers(volunteerList) {
@@ -16,23 +15,23 @@ async function fetchUsers(volunteerList) {
 }
 
 async function acceptVolunteer(facebookId, eventId) {
-  const result = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ facebookId, action: 'accept' }, 'PUT'))).json();
+  const result = await (await fetch(`${ipAdress}/events/${eventId}`, options({ facebookId, action: 'accept' }, 'PUT'))).json();
   return result;
 }
 
 async function rejectVolunteer(facebookId, eventId) {
-  const result = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ facebookId, action: 'reject' }, 'PUT'))).json();
+  const result = await (await fetch(`${ipAdress}/events/${eventId}`, options({ facebookId, action: 'reject' }, 'PUT'))).json();
   return result;
 }
 
-async function fetchOrgEvent(orgId, cb, options) {
-  const events = await (await fetch(`${ipAdress}/orgs/${orgId}/events`, options)).json();
+async function fetchOrgEvent(orgId, cb, fetchOptions) {
+  const events = await (await fetch(`${ipAdress}/orgs/${orgId}/events`, fetchOptions)).json();
   cb(events);
 }
 
-async function fetchEvents(callbacks, options) {
-  const events = await (await fetch(`${ipAdress}/events`, options)).json();
-  const orgs = await (await fetch(`${ipAdress}/orgs`, options)).json();
+async function fetchEvents(callbacks, fetchOptions) {
+  const events = await (await fetch(`${ipAdress}/events`, fetchOptions)).json();
+  const orgs = await (await fetch(`${ipAdress}/orgs`, fetchOptions)).json();
   const eventData = events.map((event) => ({
     ...event,
     orgName: orgs.filter((org) => (org.organizationId === event.organizationId))[0].name,
@@ -59,7 +58,7 @@ async function cancelEvent(eventId) {
 }
 
 async function removeUserFromEvent(facebookId, eventId) {
-  const result = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ facebookId, action: 'remove' }, 'PUT'))).json();
+  const result = await (await fetch(`${ipAdress}/events/${eventId}`, options({ facebookId, action: 'remove' }, 'PUT'))).json();
   const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
   const eventData = {
     ...result,
@@ -74,12 +73,12 @@ async function authenticateUser(username, password) {
 }
 
 async function createEvent(eventData) {
-  const response = await (await fetch(`${ipAdress}/events`, genericOptions(eventData, 'POST'))).json();
+  const response = await (await fetch(`${ipAdress}/events`, options(eventData, 'POST'))).json();
   return response;
 }
 
 async function addUserToEvent(userId, eventId) {
-  const event = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ userId }, 'POST'))).json();
+  const event = await (await fetch(`${ipAdress}/events/${eventId}`, options({ userId }, 'POST'))).json();
   const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
   const eventData = {
     ...event,
