@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import FBLoginButton from './components/FBLoginButton';
 import Home from './components/Home';
@@ -19,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
 
 export default function App() {
-  const [isLoggedin, setLoggedinStatus] = useState(false);
+  const [isLoggedin, setLoggedinStatus] = useState(true);
   const [isUser, setIsUserStatus] = useState(true);
   const [orgId, setOrgId] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -61,7 +60,7 @@ export default function App() {
                   },
                 })}
                 tabBarOptions={{
-                  activeTintColor: '#D62246',
+                  activeTintColor: '#0F084B',
                   inactiveTintColor: 'gray',
                 }}
               >

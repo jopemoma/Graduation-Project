@@ -12,7 +12,7 @@ export default function ListEvents({ navigation, type }) {
   const userStateContext = useContext(AuthContext);
   const eventStateContext = useContext(EventContext);
 
-  const [eventList, setEventList] = useState([{ title: 'Didn\'t work', organizationId: '0' }]);
+  const [eventList, setEventList] = useState(null);
 
   useEffect(() => {
     if (userStateContext.isUser) {
