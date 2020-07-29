@@ -23,7 +23,7 @@ export default function ShortList({
     <Card title={headline} containerStyle={{ padding: 0 }}>
       { list.map((li) => (
         <ListItem
-          key={li['_id']}
+          key={`listitem${li['_id']}`}
           roundAvatar
           title={li.name}
           avatar={{ uri: li.img }}

@@ -11,8 +11,8 @@ function createUser(data, abortCont) {
   return fetch(`${ipAdress}/users`, options(data, 'POST', abortCont));
 }
 
-async function fetchUser(facebookId, abortCont) {
-  return (await fetch(`${ipAdress}/users/${facebookId}`, options({}, 'GET', abortCont))).json();
+async function fetchUser(facebookId) {
+  return (await fetch(`${ipAdress}/users/${facebookId}`)).json();
 }
 
 async function fetchUsers(volunteerList) {
