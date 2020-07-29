@@ -44,21 +44,18 @@ export default function Event({ route, navigation }) {
   const userId = userStateContext.userId || '143616507442543';
 
   const joinEvent = async () => {
-    // eslint-disable-next-line dot-notation
     const response = await addUserToEvent(userId, currentEventState['_id']);
     setCurrentEventState(response);
     eventStateContext.setEventState(getNewState(oldState, response));
   };
 
   const cancelAttendance = async () => {
-    // eslint-disable-next-line dot-notation
     const response = await removeUserFromEvent(userId, currentEventState['_id']);
     setCurrentEventState(response);
     eventStateContext.setEventState(getNewState(oldState, response));
   };
 
   const handleVolunteer = async (id, func) => {
-    // eslint-disable-next-line dot-notation
     const response = await func(id, currentEventState['_id']);
     setCurrentEventState(response);
     eventStateContext.setEventState(getNewState(oldState, response));
