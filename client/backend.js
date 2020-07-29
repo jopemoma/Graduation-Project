@@ -47,14 +47,15 @@ async function fetchEvents(callbacks, fetchOptions) {
   return Promise.resolve();
 }
 
-async function fetchUserEvents(facebookId, callbacks) {
+async function fetchUserEvents(callbacks, filter) {
   const events = await (await fetch(`${ipAdress}/events`)).json();
-  const eventData = events.filter((event) => event.volunteers.includes(facebookId));
+  const eventData = events.filter(filter);
   callbacks.forEach((cb) => {
     cb(eventData);
   });
   return Promise.resolve();
 }
+
 
 async function cancelEvent(eventId) {
   const result = await fetch(`${ipAdress}/events/${eventId}`, { method: 'DELETE' });

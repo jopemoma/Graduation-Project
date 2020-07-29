@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, ListItem, Icon } from 'react-native-elements';
 import { View, Pressable } from 'react-native';
 
@@ -14,6 +14,10 @@ export default function ShortList({
   const handleReject = (id) => {
     reject(id);
   };
+
+  useEffect(() => {
+    if (list.length < 1) list.push({ name: 'Tom' });
+  });
 
   return (
     <Card title={headline} containerStyle={{ padding: 0 }}>
