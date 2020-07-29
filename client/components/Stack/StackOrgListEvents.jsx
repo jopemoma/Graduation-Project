@@ -1,10 +1,10 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import ListEvents from '../ListEvents';
-import ListVolunteers from '../ListVolunteers';
-import Profile from '../Profile';
-import Event from '../Event';
-
+/* eslint-disable react/jsx-props-no-spreading */
+import React from '../../node_modules/react';
+import { createStackNavigator } from '../../node_modules/@react-navigation/stack';
+import Event from '../common/events/Event';
+import ListEvents from '../common/events/ListEvents';
+import ListVolunteers from '../organization/ListVolunteers';
+import Profile from '../user/Profile';
 
 export default function StackOrgListEvents() {
   const Stack = createStackNavigator();

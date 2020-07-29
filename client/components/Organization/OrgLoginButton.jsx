@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input, Button } from 'react-native-elements';
-import { authenticateUser } from '../backend';
-import { AuthContext } from '../contexts';
+import React, { useState, useContext } from '../../node_modules/react';
+import Icon from '../../node_modules/react-native-vector-icons/FontAwesome';
+import { Input, Button } from '../../node_modules/react-native-elements';
+import { authenticateUser } from '../../backend';
+import { AuthContext } from '../../contexts';
 
 export default function OrgLoginButton() {
   const userStateContext = useContext(AuthContext);

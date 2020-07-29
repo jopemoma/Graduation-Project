@@ -2,7 +2,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Card, Button, Badge, SearchBar } from 'react-native-elements';
+import {
+  Card, Button, Badge, SearchBar,
+} from 'react-native-elements';
 
 export default function LongList({ navigation, navigateTo, list }) {
   return (
@@ -19,7 +21,10 @@ export default function LongList({ navigation, navigateTo, list }) {
           <Text style={{ marginBottom: 10 }}>
             {li.description}
           </Text>
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
+          <View style={{
+            flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly',
+          }}
+          >
             <View>
               <Button
                 onPress={() => navigation.navigate(navigateTo, { li })}

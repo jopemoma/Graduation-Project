@@ -1,8 +1,8 @@
 /* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Card, ListItem, Icon } from 'react-native-elements';
-import { View, Pressable } from 'react-native';
+import { View } from 'react-native';
 
 export default function ShortList({
   navigation, navigateTo, headline, list, accept, reject,
@@ -23,7 +23,7 @@ export default function ShortList({
     <Card title={headline} containerStyle={{ padding: 0 }}>
       { list.map((li) => (
         <ListItem
-          key={li['_id']}
+          key={`listitem${li['_id']}`}
           roundAvatar
           title={li.name}
           avatar={{ uri: li.img }}

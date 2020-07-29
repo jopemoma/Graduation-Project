@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext, useEffect } from 'react';
 import { ScrollView } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { fetchUserEvents } from '../backend';
-import { AuthContext } from '../contexts';
-import ShortList from './ShortList';
+import React, { useState, useContext } from '../../node_modules/react';
+import { useFocusEffect } from '../../node_modules/@react-navigation/native';
+import { fetchUserEvents } from '../../backend';
+import { AuthContext } from '../../contexts';
+import ShortList from '../common/ShortList';
 
 export default function MyEvents({ navigation }) {
   const [confirmedEvents, setConfirmedEvents] = useState(null);
   const [pendingEvents, setPendingEvents] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [deniedEvents, setDeniedEvents] = useState(null);
   const userStateContext = useContext(AuthContext);
 

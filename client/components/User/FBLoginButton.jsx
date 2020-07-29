@@ -1,4 +1,3 @@
-import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,17 +5,13 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import * as Facebook from 'expo-facebook';
-import { AppLoading } from 'expo';
-import {
-  useFonts,
-  LoveYaLikeASister_400Regular,
-} from '@expo-google-fonts/love-ya-like-a-sister';
-import { AuthContext } from '../contexts';
-import { createUser } from '../backend';
+import React, { useEffect, useState, useContext } from 'react';
+import * as Facebook from '../../node_modules/expo-facebook';
+import { AuthContext } from '../../contexts';
+import { createUser } from '../../backend';
 
 const appId = '1167950023585231';
-const imgSrc = require('../assets/icon.png');
+const imgSrc = require('../../assets/icon.png');
 
 const styles = StyleSheet.create({
   container: {
@@ -45,34 +40,29 @@ export default function FBLoginButton() {
   const userStateContext = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
 
+  const abortController = new AbortController();
+
+  useEffect(() => () => abortController.abort(), []);
+
   const facebookLogIn = async () => {
     await Facebook.initializeAsync(appId);
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(appId, { permissions: ['public_profile'] });
       if (type === 'success') {
-        fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
+        fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`, { signal: abortController.signal })
           .then((response) => response.json())
-          .then((data) => {
-            createUser(data);
+          .then(async (data) => {
+            setUserData(data);
+            await createUser(data, abortController);
             userStateContext.setUserId(data.id);
             userStateContext.setLoggedinStatus(true);
-            setUserData(data);
           })
-          .catch((e) => console.log(e));
-      } else {
-        // type === 'cancel'
+          .catch((e) => console.error(e));
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
   };
-  const [fontsLoaded] = useFonts({
-    LoveYaLikeASister_400Regular,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
   return (
     <View style={styles.container}>
       <Text style={{ fontFamily: 'sans-serif', fontSize: 55, color: '#143642', fontWeight: 'bold', marginLeft: 60, marginTop: -160 }}>BIDRA. SAMMEN.</Text>

@@ -3,10 +3,12 @@ import { ip } from './ip.json';
 const ipAdress = `http://${ip}:3000`;
 
 const authenticateOptions = (username, password) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
-const options = (data, method) => ({ method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+const options = (data, method, abortController) => ({
+  signal: abortController.signal, method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
+});
 
-function createUser(data) {
-  fetch(`${ipAdress}/users`, options(data, 'POST'));
+function createUser(data, abortCont) {
+  return fetch(`${ipAdress}/users`, options(data, 'POST', abortCont));
 }
 
 async function fetchUser(facebookId) {
@@ -55,7 +57,6 @@ async function fetchUserEvents(callbacks, filter) {
   });
   return Promise.resolve();
 }
-
 
 async function cancelEvent(eventId) {
   const result = await fetch(`${ipAdress}/events/${eventId}`, { method: 'DELETE' });
