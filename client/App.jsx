@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
 
 export default function App() {
-  const [isLoggedin, setLoggedinStatus] = useState(true);
+  const [isLoggedin, setLoggedinStatus] = useState(false);
   const [isUser, setIsUserStatus] = useState(true);
   const [orgId, setOrgId] = useState(null);
   const [userId, setUserId] = useState(null);

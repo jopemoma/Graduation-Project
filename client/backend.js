@@ -44,6 +44,15 @@ async function fetchEvents(callbacks, options) {
   return Promise.resolve();
 }
 
+async function fetchUserEvents(facebookId, callbacks) {
+  const events = await (await fetch(`${ipAdress}/events`)).json();
+  const eventData = events.filter((event) => event.volunteers.includes(facebookId));
+  callbacks.forEach((cb) => {
+    cb(eventData);
+  });
+  return Promise.resolve();
+}
+
 async function cancelEvent(eventId) {
   const result = await fetch(`${ipAdress}/events/${eventId}`, { method: 'DELETE' });
   return result;
@@ -71,5 +80,5 @@ async function addUserToEvent(userId, eventId) {
 
 export {
   updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
-  fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent,
+  fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent, fetchUserEvents,
 };
