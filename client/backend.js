@@ -9,6 +9,10 @@ function createUser(data) {
   fetch(`${ipAdress}/users`, options(data, 'POST'));
 }
 
+async function fetchUser(facebookId) {
+  return (await fetch(`${ipAdress}/users/${facebookId}`)).json();
+}
+
 async function fetchUsers(volunteerList) {
   const returnArray = await Promise.all(volunteerList.map(async (fbId) => (await fetch(`${ipAdress}/users/${fbId}`)).json()));
   return returnArray;
@@ -90,4 +94,5 @@ async function addUserToEvent(userId, eventId) {
 export {
   createUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
   fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent, fetchUserEvents, removeUserFromEvent,
+  fetchUser,
 };
