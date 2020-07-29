@@ -1,16 +1,18 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+
 import FBLoginButton from './components/FBLoginButton';
 import Home from './components/Home';
 import StackListEvents from './components/Stack/StackListEvents';
 import StackOrgListEvents from './components/Stack/StackOrgListEvents';
 import StackOrgCreateEvent from './components/Stack/StackOrgCreateEvent';
 import StackMyEvents from './components/Stack/StackMyEvents';
+import StackMyProfile from './components/Stack/StackMyProfile';
 import OrgLoginButton from './components/OrgLoginButton';
 import { AuthContext, EventContext } from './contexts';
 
@@ -66,6 +68,7 @@ export default function App() {
               >
                 <Tab.Screen name="TabListEvents" component={StackListEvents} options={{ title: 'Arrangementer' }} />
                 <Tab.Screen name="TabMyEvents" component={StackMyEvents} options={{ title: 'Påmeldinger' }} />
+                <Tab.Screen name="TabMyProfile" component={StackMyProfile} options={{ title: 'Min profil' }} />
               </Tab.Navigator>
             </NavigationContainer>
           </EventContext.Provider>
@@ -78,7 +81,7 @@ export default function App() {
           <EventContext.Provider value={eventContext}>
             <NavigationContainer>
               <Tab.Navigator>
-                <Tab.Screen name="TabOrgListEvents" component={StackOrgListEvents} options={{ title: 'Arrangementer' }} />            
+                <Tab.Screen name="TabOrgListEvents" component={StackOrgListEvents} options={{ title: 'Arrangementer' }} />
                 <Tab.Screen name="TabOrgCreateEvent" component={StackOrgCreateEvent} options={{ title: 'Ny oppføring' }} />
               </Tab.Navigator>
             </NavigationContainer>

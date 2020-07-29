@@ -4,12 +4,15 @@ import { ScrollView, View, Text } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { fetchUser } from '../backend';
 
-export default function Profile({ route, navigation }) {
+export default function Profile({ navigation, userId }) {
   const [profileState, setProfileState] = useState(null);
 
-  useEffect(async () => {
-    setProfileState(await fetchUser(route.params.userId));
-  }, [profileState]);
+  useEffect(() => {
+    async function get() {
+      setProfileState(await fetchUser(userId));
+    }
+    get();
+  }, []);
 
   if (!profileState) return null;
 

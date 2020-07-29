@@ -19,7 +19,6 @@ export default function ListEvents({ navigation, type }) {
       fetchEvents([eventStateContext.setEventState, setEventList]);
     } else {
       fetchOrgEvent(userStateContext.orgId, setEventList);
-      console.log('Refreshing ListEvents state.');
     }
   }, [eventStateContext.eventState]);
 

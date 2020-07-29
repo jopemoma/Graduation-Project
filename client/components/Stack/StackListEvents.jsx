@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import ListEvents from '../ListEvents';
 import Event from '../Event';
 
