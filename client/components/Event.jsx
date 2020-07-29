@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
@@ -5,7 +6,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext, EventContext } from '../contexts';
 import {
-  addUserToEvent, acceptVolunteer, rejectVolunteer, cancelEvent, fetchEvents,
+  addUserToEvent, acceptVolunteer, rejectVolunteer, cancelEvent, fetchEvents, removeUserFromEvent,
 } from '../backend';
 
 export default function Event({ route, navigation }) {
@@ -49,6 +50,13 @@ export default function Event({ route, navigation }) {
     eventStateContext.setEventState(getNewState(oldState, response));
   };
 
+  const cancelAttendance = async () => {
+    // eslint-disable-next-line dot-notation
+    const response = await removeUserFromEvent(userId, currentEventState['_id']);
+    setCurrentEventState(response);
+    eventStateContext.setEventState(getNewState(oldState, response));
+  };
+
   const handleVolunteer = async (id, func) => {
     // eslint-disable-next-line dot-notation
     const response = await func(id, currentEventState['_id']);
@@ -84,9 +92,9 @@ export default function Event({ route, navigation }) {
             {`Plasser ledig nå ${currentEventState.slotsRemaining}`}
           </Text>
           <Button
-            icon={<Icon name="check" color="#ffffff" />}
+            icon={<Icon name="check" color="#ffffff" style={{ marginRight: 10 }} />}
             buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
+              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 20,
             }}
             title="Bli med nå!"
             onPress={joinEvent}
@@ -94,6 +102,17 @@ export default function Event({ route, navigation }) {
                 || currentEventState.volunteers.includes(userId)
                 || currentEventState.pending.includes(userId)}
           />
+          { currentEventState.volunteers.includes(userId) || currentEventState.pending.includes(userId)
+            ? (
+              <Button
+                icon={<Icon name="cancel" color="#ffffff" style={{ marginRight: 10 }} />}
+                buttonStyle={{
+                  borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: 'red',
+                }}
+                title="Trekk deg"
+                onPress={cancelAttendance}
+              />
+            ) : null}
         </Card>
         <View style={styles.bottom}>
           <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('ListEvents')} />
@@ -105,7 +124,7 @@ export default function Event({ route, navigation }) {
     <View style={styles.container}>
       <Card
         key={currentEventState['_id']}
-        title={`${currentEventState.orgName} - ${currentEventState.name}`}
+        title={`${currentEventState.name}`}
         image={{ uri: currentEventState.img }}
       >
         <Text style={{ marginBottom: 10 }}>

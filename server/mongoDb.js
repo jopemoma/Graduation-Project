@@ -50,7 +50,7 @@ async function fetchEvents(filter = {}) {
   return res;
 }
 
-async function acceptVolunteer(eventId, body) {
+async function handleVolunteer(eventId, body) {
   switch (body.action) {
     case 'accept': {
       const res = await Event.findOneAndUpdate(eventId, {
@@ -66,8 +66,24 @@ async function acceptVolunteer(eventId, body) {
       }, { new: true });
       return res;
     }
+    case 'remove': {
+      const eventData = await Event.findOne(eventId);
+      if (eventData.volunteers.includes(body.facebookId)) {
+        const res = Event.findOneAndUpdate(eventId, {
+          $pull: { volunteers: body.facebookId },
+          $inc: { slotsRemaining: +1 },
+        }, { new: true });
+        return res;
+      } if (eventData.pending.includes(body.facebookId)) {
+        const res = Event.findOneAndUpdate(eventId, {
+          $pull: { pending: body.facebookId },
+        }, { new: true });
+        return res;
+      }
+      return eventData;
+    }
     default:
-      console.log('Oops. Default case in acceptVolunteer.');
+      console.log('Oops. Default case in handleVolunteer.');
       return null;
   }
 }
@@ -110,6 +126,6 @@ module.exports = {
   authenticate,
   createEvent,
   addPending,
-  acceptVolunteer,
+  handleVolunteer,
   deleteEvent,
 };
