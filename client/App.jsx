@@ -6,14 +6,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-import FBLoginButton from './components/FBLoginButton';
-import Home from './components/Home';
+import Home from './components/Common/Home';
+import OrgLoginButton from './components/Organization/OrgLoginButton';
 import StackListEvents from './components/Stack/StackListEvents';
 import StackOrgListEvents from './components/Stack/StackOrgListEvents';
 import StackOrgCreateEvent from './components/Stack/StackOrgCreateEvent';
 import StackMyEvents from './components/Stack/StackMyEvents';
 import StackMyProfile from './components/Stack/StackMyProfile';
-import OrgLoginButton from './components/OrgLoginButton';
+import FBLoginButton from './components/User/FBLoginButton';
+
 import { AuthContext, EventContext } from './contexts';
 
 const Tab = createBottomTabNavigator();

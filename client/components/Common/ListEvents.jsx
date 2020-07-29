@@ -3,8 +3,8 @@ import React, {
   useEffect, useContext, useState,
 } from 'react';
 import { ScrollView } from 'react-native';
-import { fetchEvents, fetchOrgEvent } from '../backend';
-import { EventContext, AuthContext } from '../contexts';
+import { fetchEvents, fetchOrgEvent } from '../../backend';
+import { EventContext, AuthContext } from '../../contexts';
 import LongList from './LongList';
 import ShortList from './ShortList';
 

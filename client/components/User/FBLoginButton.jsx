@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
-import { AuthContext } from '../contexts';
-import { createUser } from '../backend';
+import { AuthContext } from '../../contexts';
+import { createUser } from '../../backend';
 
 const appId = '1167950023585231';
-const imgSrc = require('../assets/icon.png');
+const imgSrc = require('../../assets/icon.png');
 
 const styles = StyleSheet.create({
   container: {

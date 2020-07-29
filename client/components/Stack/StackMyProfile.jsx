@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Profile from '../Profile';
+import Profile from '../User/Profile';
 import { AuthContext } from '../../contexts';
 
 export default function StackMyEvents() {

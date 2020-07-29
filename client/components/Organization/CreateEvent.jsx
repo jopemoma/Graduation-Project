@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { Input, Button } from 'react-native-elements';
-import { createEvent } from '../backend';
-import { AuthContext } from '../contexts';
+import { createEvent } from '../../backend';
+import { AuthContext } from '../../contexts';
 
 export default function CreateEvent({ navigation }) {
   const userStateContext = useContext(AuthContext);

@@ -4,10 +4,10 @@ import React, {
 } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
-import { fetchUsers } from '../backend';
+import { fetchUsers } from '../../backend';
 /* import { AuthContext } from '../contexts'; */
-import LongList from './LongList';
-import ShortList from './ShortList';
+import LongList from '../Common/LongList';
+import ShortList from '../Common/ShortList';
 
 export default function ListVolunteers({ route, navigation, type }) {
   const [userNameState, setUserNameState] = useState([{ _id: '1', name: 'Laster...', img: '' }]);

@@ -4,10 +4,10 @@
 import React, { useContext, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
-import { AuthContext, EventContext } from '../contexts';
+import { AuthContext, EventContext } from '../../contexts';
 import {
   addUserToEvent, acceptVolunteer, rejectVolunteer, cancelEvent, fetchEvents, removeUserFromEvent,
-} from '../backend';
+} from '../../backend';
 
 export default function Event({ route, navigation }) {
   const userStateContext = useContext(AuthContext);

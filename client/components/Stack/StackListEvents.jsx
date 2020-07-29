@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import ListEvents from '../ListEvents';
-import Event from '../Event';
+import ListEvents from '../Common/ListEvents';
+import Event from '../Common/Event';
 
 export default function StackListEvents() {
   const Stack = createStackNavigator();

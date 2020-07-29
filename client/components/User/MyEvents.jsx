@@ -2,9 +2,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { fetchUserEvents } from '../backend';
-import { AuthContext } from '../contexts';
-import ShortList from './ShortList';
+import { fetchUserEvents } from '../../backend';
+import { AuthContext } from '../../contexts';
+import ShortList from '../Common/ShortList';
 
 export default function MyEvents({ navigation }) {
   const [confirmedEvents, setConfirmedEvents] = useState(null);

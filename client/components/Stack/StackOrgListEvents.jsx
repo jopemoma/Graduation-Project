@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import ListEvents from '../ListEvents';
-import ListVolunteers from '../ListVolunteers';
-import Profile from '../Profile';
-import Event from '../Event';
+import Event from '../Common/Event';
+import ListEvents from '../Common/ListEvents';
+import ListVolunteers from '../Organization/ListVolunteers';
+import Profile from '../User/Profile';
 
 
 export default function StackOrgListEvents() {

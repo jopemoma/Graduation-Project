@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import CreateEvent from '../CreateEvent';
-import Event from '../Event';
+import Event from '../Common/Event';
+import CreateEvent from '../Organization/CreateEvent';
 
 export default function StackOrgCreateEvent() {
   const Stack = createStackNavigator();
