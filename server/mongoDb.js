@@ -18,8 +18,8 @@ function connect() {
   });
 }
 
-function createUser(id, name) {
-  const newUser = new User({ facebookId: id, name });
+function createUser(data) {
+  const newUser = new User({ facebookId: data.id, ...data });
   newUser.save((err) => {
     if (err) return false;
     return true;
@@ -40,8 +40,8 @@ async function fetchUser(facebookId) {
   return res;
 }
 
-async function isUser(facebookId) {
-  const res = await User.exists({ facebookId });
+async function isUser(id) {
+  const res = await User.exists({ facebookId: id });
   return res;
 }
 

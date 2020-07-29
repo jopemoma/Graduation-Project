@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { AuthContext } from '../contexts';
-import { updateUser } from '../backend';
+import { createUser } from '../backend';
 
 const appId = '1167950023585231';
 const imgSrc = require('../assets/icon.png');
@@ -48,7 +48,7 @@ export default function FBLoginButton() {
         fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
           .then((response) => response.json())
           .then((data) => {
-            updateUser(data.id, data.name);
+            createUser(data);
             userStateContext.setUserId(data.id);
             userStateContext.setLoggedinStatus(true);
             setUserData(data);

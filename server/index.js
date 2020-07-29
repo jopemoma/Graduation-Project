@@ -59,11 +59,10 @@ app.get('/users/:facebookId', async (req, res) => {
 });
 
 app.post('/users', async (req, res) => {
-  const { facebookId, name } = req.body;
-  if (db.isUser(facebookId)) {
+  if (await db.isUser(req.body.id)) {
     return res.sendStatus(200);
   }
-  db.createUser(facebookId, name);
+  db.createUser(req.body);
   return res.sendStatus(201);
 });
 

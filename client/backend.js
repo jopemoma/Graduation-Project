@@ -2,12 +2,12 @@ import { ip } from './ip.json';
 
 const ipAdress = `http://${ip}:3000`;
 
-const userOptions = (id, name) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ facebookId: id, name }) });
+const userOptions = (data) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 const authenticateOptions = (username, password) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
 const genericOptions = (data, method) => ({ method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 
-function updateUser(id, name) {
-  fetch(`${ipAdress}/users`, userOptions(id, name));
+function createUser(data) {
+  fetch(`${ipAdress}/users`, userOptions(data));
 }
 
 async function fetchUsers(volunteerList) {
@@ -79,6 +79,6 @@ async function addUserToEvent(userId, eventId) {
 }
 
 export {
-  updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
+  createUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
   fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent, fetchUserEvents,
 };
