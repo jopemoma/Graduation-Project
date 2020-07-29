@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from 'react';
 import { ScrollView } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { fetchUserEvents } from '../backend';
 import { AuthContext } from '../contexts';
 import ShortList from './ShortList';
@@ -20,8 +21,21 @@ export default function MyEvents({ navigation }) {
       [setPendingEvents],
       (event) => event.pending.includes(userStateContext.userId),
     );
-    console.log('this is rendering')
-  }, [confirmedEvents, pendingEvents]);
+    console.log('this is rendering');
+  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchUserEvents(
+        [setConfirmedEvents],
+        (event) => event.volunteers.includes(userStateContext.userId),
+      );
+      fetchUserEvents(
+        [setPendingEvents],
+        (event) => event.pending.includes(userStateContext.userId),
+      );
+    }, []),
+  );
 
   return (
     <ScrollView>
