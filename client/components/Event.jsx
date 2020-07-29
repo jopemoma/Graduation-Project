@@ -6,7 +6,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import { AuthContext, EventContext } from '../contexts';
 import {
-  addUserToEvent, acceptVolunteer, rejectVolunteer, cancelEvent, fetchEvents,
+  addUserToEvent, acceptVolunteer, rejectVolunteer, cancelEvent, fetchEvents, removeUserFromEvent,
 } from '../backend';
 
 export default function Event({ route, navigation }) {
@@ -46,6 +46,13 @@ export default function Event({ route, navigation }) {
   const joinEvent = async () => {
     // eslint-disable-next-line dot-notation
     const response = await addUserToEvent(userId, currentEventState['_id']);
+    setCurrentEventState(response);
+    eventStateContext.setEventState(getNewState(oldState, response));
+  };
+
+  const cancelAttendance = async () => {
+    // eslint-disable-next-line dot-notation
+    const response = await removeUserFromEvent(userId, currentEventState['_id']);
     setCurrentEventState(response);
     eventStateContext.setEventState(getNewState(oldState, response));
   };
@@ -103,7 +110,7 @@ export default function Event({ route, navigation }) {
                   borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: 'red',
                 }}
                 title="Trekk deg"
-                onPress={joinEvent}
+                onPress={cancelAttendance}
               />
             ) : null}
         </Card>
@@ -117,7 +124,7 @@ export default function Event({ route, navigation }) {
     <View style={styles.container}>
       <Card
         key={currentEventState['_id']}
-        title={`${currentEventState.orgName} - ${currentEventState.name}`}
+        title={`${currentEventState.name}`}
         image={{ uri: currentEventState.img }}
       >
         <Text style={{ marginBottom: 10 }}>

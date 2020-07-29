@@ -58,6 +58,16 @@ async function cancelEvent(eventId) {
   return result;
 }
 
+async function removeUserFromEvent(facebookId, eventId) {
+  const result = await (await fetch(`${ipAdress}/events/${eventId}`, genericOptions({ facebookId, action: 'remove' }, 'PUT'))).json();
+  const orgs = await (await fetch(`${ipAdress}/orgs`)).json();
+  const eventData = {
+    ...result,
+    orgName: orgs.filter((org) => (org.organizationId === result.organizationId))[0].name,
+  };
+  return eventData;
+}
+
 async function authenticateUser(username, password) {
   const response = await (await fetch(`${ipAdress}/authenticate`, authenticateOptions(username, password))).json(); // object
   return response;
@@ -80,5 +90,5 @@ async function addUserToEvent(userId, eventId) {
 
 export {
   updateUser, fetchEvents, authenticateUser, createEvent, addUserToEvent, fetchOrgEvent,
-  fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent, fetchUserEvents,
+  fetchUsers, acceptVolunteer, rejectVolunteer, cancelEvent, fetchUserEvents, removeUserFromEvent,
 };
