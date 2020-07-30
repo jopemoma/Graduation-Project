@@ -89,7 +89,7 @@ export default function App() {
             <NavigationContainer>
               <Tab.Navigator
                 screenOptions={({ route }) => ({
-                  tabBarIcon: ({ focused, color, size }) => {
+                  tabBarIcon: ({ color, size }) => {
                     if (route.name === 'TabOrgListEvents') {
                       return (
                         <MaterialIcons name="event-available" size={size} color={color} />
@@ -131,7 +131,13 @@ export default function App() {
         >
           <LoginStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <LoginStack.Screen name="LoginUser" component={FBLoginButton} options={{ title: 'Logg  inn med FaceBook', headerTitleAlign: 'center' }} />
-          <LoginStack.Screen name="LoginOrganisation" component={OrgLoginButton} options={{ title: 'Logg  som administrator', headerTitleAlign: 'center', headerStyle: { backgroundColor: '#143642' }, headerTintColor: '#C2E7D9' }} />
+          <LoginStack.Screen
+            name="LoginOrganisation"
+            component={OrgLoginButton}
+            options={{
+              title: 'Logg  som administrator', headerTitleAlign: 'center', headerStyle: { backgroundColor: '#143642' }, headerTintColor: '#C2E7D9',
+            }}
+          />
         </LoginStack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
