@@ -3,12 +3,12 @@ import { ip } from './ip.json';
 const ipAdress = `http://${ip}:3000`;
 
 const authenticateOptions = (username, password) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
-const options = (data, method, abortController) => ({
-  signal: abortController.signal, method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
+const options = (data, method) => ({
+  method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
 });
 
-function createUser(data, abortCont) {
-  return fetch(`${ipAdress}/users`, options(data, 'POST', abortCont));
+function createUser(data) {
+  return fetch(`${ipAdress}/users`, options(data, 'POST'));
 }
 
 async function fetchUser(facebookId) {

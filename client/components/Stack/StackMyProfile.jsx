@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable max-len */
-import React, { useContext } from '../../node_modules/react';
-import { createStackNavigator } from '../../node_modules/@react-navigation/stack';
+import React, { useContext } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import Profile from '../user/Profile';
 import { AuthContext } from '../../contexts';
 

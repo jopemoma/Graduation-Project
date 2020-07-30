@@ -1,5 +1,5 @@
-import React from '../../node_modules/react';
-import { createStackNavigator } from '../../node_modules/@react-navigation/stack';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import Event from '../common/events/Event';
 import MyEvents from '../user/MyEvents';
 

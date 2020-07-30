@@ -1,13 +1,19 @@
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
   View,
+  Image,
   TouchableOpacity,
 } from 'react-native';
-import React, { useEffect, useState, useContext } from 'react';
 import * as Facebook from 'expo-facebook';
-import { AuthContext } from '../../contexts';
-import { createUser } from '../../backend';
+import { AppLoading } from 'expo';
+import {
+  useFonts,
+  LoveYaLikeASister_400Regular,
+} from '@expo-google-fonts/love-ya-like-a-sister';
+import { AuthContext } from '../contexts';
+import { createUser } from '../backend';
 
 const appId = '1167950023585231';
 
@@ -45,18 +51,27 @@ export default function FBLoginButton() {
       if (type === 'success') {
         fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
           .then((response) => response.json())
-          .then(async (data) => {
-            setUserData(data);
-            await createUser(data);
+          .then((data) => {
+            createUser(data);
             userStateContext.setUserId(data.id);
             userStateContext.setLoggedinStatus(true);
+            setUserData(data);
           })
-          .catch((e) => console.error(e));
+          .catch((e) => console.log(e));
+      } else {
+        // type === 'cancel'
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
   };
+  const [fontsLoaded] = useFonts({
+    LoveYaLikeASister_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
   return (
     <View style={styles.container}>
       <Text style={{ fontFamily: 'sans-serif', fontSize: 55, color: '#143642', fontWeight: 'bold', marginLeft: 60, marginTop: -160 }}>BIDRA. SAMMEN.</Text>

@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext } from '../../node_modules/react';
-import { Input, Button } from '../../node_modules/react-native-elements';
+import React, { useState, useContext } from 'react';
+import { Input, Button } from 'react-native-elements';
 import { createEvent } from '../../backend';
 import { AuthContext } from '../../contexts';
 
 export default function CreateEvent({ navigation }) {
   const userStateContext = useContext(AuthContext);
-  const [title, setTitle] = useState('');
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [time, setTime] = useState('');
@@ -15,7 +15,7 @@ export default function CreateEvent({ navigation }) {
 
   const addEvent = async () => {
     const eventData = {
-      title,
+      name,
       organizationId: userStateContext.orgId,
       description,
       location,
@@ -34,7 +34,7 @@ export default function CreateEvent({ navigation }) {
     <>
       <Input
         placeholder="Tittel"
-        onChangeText={setTitle}
+        onChangeText={setName}
       />
       <Input
         placeholder="Beskrivelse"

@@ -15,10 +15,6 @@ export default function ShortList({
     reject(id);
   };
 
-  useEffect(() => {
-    if (list.length < 1) list.push({ name: 'Tom' });
-  });
-
   return (
     <Card title={headline} containerStyle={{ padding: 0 }}>
       { list.map((li) => (

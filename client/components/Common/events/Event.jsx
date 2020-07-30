@@ -7,13 +7,7 @@ import { AuthContext, EventContext } from '../../../contexts';
 import {
   addUserToEvent, cancelEvent, fetchEvents, removeUserFromEvent,
 } from '../../../backend';
-
-/*
-import/no-unresolved  is disabled here due to a bug with eslint.
-*/
-// eslint-disable-next-line import/no-unresolved
 import UserEventCard from './UserEventCard';
-// eslint-disable-next-line import/no-unresolved
 import OrgEventCard from './OrgEventCard';
 
 export default function Event({ route, navigation }) {
