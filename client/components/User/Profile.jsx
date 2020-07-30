@@ -20,7 +20,7 @@ export default function Profile({ route, navigation }) {
   return (
     <ScrollView>
       <View style={{ flex: 1, flexDirection: 'row' }}>
-        <Avatar rounded size="medium" source={{ uri: profileState.picture.data.url }} />
+        <Avatar rounded size="large" source={{ uri: profileState.picture.data.url }} />
         <Text>{profileState.name}</Text>
       </View>
       <View>
