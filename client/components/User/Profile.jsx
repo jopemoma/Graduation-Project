@@ -19,13 +19,23 @@ export default function Profile({ route, navigation }) {
 
   return (
     <ScrollView>
-      <View style={{ flex: 1, flexDirection: 'row' }}>
-        <Avatar rounded size="large" source={{ uri: profileState.picture.data.url }} />
-        <Text>{profileState.name}</Text>
-      </View>
-      <View>
-        <Text>
-          Email:
+      <View style={{
+        flex: 1, marginTop: 35, justifyContent: 'center', alignItems: 'center',
+      }}
+      >
+        <Avatar
+          containerStyle={{ marginBottom: 25 }}
+          rounded
+          size={260}
+          source={{ uri: profileState.picture.data.url }}
+        />
+        <Text style={{
+          marginBottom: 10, fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: 33,
+        }}
+        >
+          {profileState.name}
+        </Text>
+        <Text style={{ fontFamily: 'sans-serif', fontSize: 15 }}>
           {profileState.email}
         </Text>
       </View>

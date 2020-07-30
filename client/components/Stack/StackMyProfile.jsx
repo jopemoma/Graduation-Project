@@ -11,9 +11,9 @@ export default function StackMyEvents() {
   return (
     <Stack.Navigator screenOptions={{
       headerStyle: {
-        backgroundColor: '#D62246',
+        backgroundColor: '#C2E7D9',
       },
-      headerTintColor: '#fff',
+      headerTintColor: '#0F084B',
       headerTitleStyle: {
         fontWeight: 'bold',
       },

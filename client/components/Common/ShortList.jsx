@@ -21,13 +21,13 @@ export default function ShortList({
   };
 
   return (
-    <Card title={headline} containerStyle={{ padding: 0 }}>
+    <Card title={headline} titleStyle={{ marginTop: 15 }} containerStyle={{ padding: 0 }}>
       { listState.map((li) => (
         <ListItem
           key={`listitem${li['_id']}`}
           roundAvatar
           title={li.name}
-          avatar={{ uri: li.img }}
+          leftAvatar={{ source: { uri: li.img } }}
           onPress={() => navigation.navigate(navigateTo, { li })}
           rightElement={accept ? (
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>

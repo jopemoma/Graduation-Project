@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
 
 export default function FBLoginButton() {
   const userStateContext = useContext(AuthContext);
+  // eslint-disable-next-line no-unused-vars
   const [userData, setUserData] = useState(null);
 
   const facebookLogIn = async () => {
