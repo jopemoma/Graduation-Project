@@ -10,6 +10,7 @@ import ShortList from '../common/ShortList';
 export default function MyEvents({ navigation }) {
   const [confirmedEvents, setConfirmedEvents] = useState(null);
   const [pendingEvents, setPendingEvents] = useState(null);
+  const [rejectedEvents, setRejectedEvents] = useState(null);
   const userStateContext = useContext(AuthContext);
 
   useFocusEffect(
@@ -22,6 +23,10 @@ export default function MyEvents({ navigation }) {
         [setPendingEvents],
         (event) => event.pending.includes(userStateContext.userId),
       );
+      fetchUserEvents(
+        [setRejectedEvents],
+        (event) => event.rejected.includes(userStateContext.userId),
+      );
     }, []),
   );
   if (!confirmedEvents && !pendingEvents) return <AppLoading />;
@@ -30,6 +35,7 @@ export default function MyEvents({ navigation }) {
     <ScrollView>
       { confirmedEvents ? <ShortList headline="Bekreftede" list={confirmedEvents} navigation={navigation} navigateTo="Event" /> : null}
       { pendingEvents ? <ShortList headline="Ubekreftede" list={pendingEvents} navigation={navigation} navigateTo="Event" /> : null}
+      { rejectedEvents ? <ShortList headline="Søknad avslått" list={rejectedEvents} navigation={navigation} navigateTo="Event" /> : null}
     </ScrollView>
   );
 }

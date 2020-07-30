@@ -11,6 +11,7 @@ const eventSchema = new mongoose.Schema({
   slotsRemaining: Number,
   volunteers: Array,
   pending: Array,
+  rejected: Array,
 });
 
 const Event = mongoose.model('Events', eventSchema);

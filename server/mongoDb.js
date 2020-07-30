@@ -78,6 +78,7 @@ async function handleVolunteer(eventId, body) {
     }
     case 'reject': {
       const res = await Event.findOneAndUpdate(eventId, {
+        $push: { rejected: body.facebookId },
         $pull: { pending: body.facebookId },
       }, { new: true });
       return res;
