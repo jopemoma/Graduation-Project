@@ -26,7 +26,6 @@ export default function CreateEvent({ navigation }) {
     };
     // eslint-disable-next-line no-unused-vars
     const response = await createEvent(eventData);
-    // TODO: check that the response is ok, give feedback and send organization to OrgPage
     navigation.navigate('ListEvents');
   };
 
@@ -58,7 +57,7 @@ export default function CreateEvent({ navigation }) {
       />
 
       <Button title="Create Event" type="solid" onPress={addEvent} />
-      <Button title="Back" type="solid" onPress={() => navigation.navigate('OrgPage')} />
+      <Button title="Back" type="solid" onPress={() => navigation.navigate('ListEvents')} />
     </>
   );
 }
