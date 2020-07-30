@@ -22,7 +22,7 @@ export default function ListEvents({ navigation, type }) {
       } else {
         fetchOrgEvent(userStateContext.orgId, setEventList);
       }
-    }),
+    }, []),
   );
 
   if (!eventList) return null;

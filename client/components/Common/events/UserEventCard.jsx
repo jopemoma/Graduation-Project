@@ -53,9 +53,6 @@ export default function UserEventCard(props) {
               />
             ) : null}
         </Card>
-        <View style={styles.bottom}>
-          <Button title="Gå tilbake" type="solid" onPress={() => navigation.navigate('ListEvents')} />
-        </View>
       </View>
     </ScrollView>
   );

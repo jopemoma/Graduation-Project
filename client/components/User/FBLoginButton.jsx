@@ -4,7 +4,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import * as Facebook from 'expo-facebook';
 import { AuthContext } from '../../contexts';
 import { createUser } from '../../backend';
@@ -59,7 +59,12 @@ export default function FBLoginButton() {
   };
   return (
     <View style={styles.container}>
-      <Text style={{ fontFamily: 'sans-serif', fontSize: 55, color: '#143642', fontWeight: 'bold', marginLeft: 60, marginTop: -160 }}>BIDRA. SAMMEN.</Text>
+      <Text style={{
+        fontFamily: 'sans-serif', fontSize: 55, color: '#143642', fontWeight: 'bold', marginLeft: 60, marginTop: -160,
+      }}
+      >
+        BIDRA. SAMMEN.
+      </Text>
       <Text style={{ marginBottom: 100, fontSize: 18 }}>Appen som gjør det enklere å bidra</Text>
       <TouchableOpacity style={styles.loginBtn} onPress={facebookLogIn}>
         <Text style={{ color: '#C2E7D9' }}>Logg inn med facebook</Text>

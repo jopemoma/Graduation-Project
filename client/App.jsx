@@ -55,6 +55,11 @@ export default function App() {
                         <MaterialIcons name="event-available" size={size} color={color} />
                       );
                     }
+                    if (route.name === 'TabMyProfile') {
+                      return (
+                        <Ionicons name="ios-person" size={size} color={color} />
+                      );
+                    }
                     return (
                       <Ionicons name={focused ? 'ios-list-box' : 'ios-list'} size={size} color={color} />
                     );
