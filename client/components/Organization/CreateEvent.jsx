@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
+import { ScrollView, View } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { createEvent } from '../../backend';
 import { AuthContext } from '../../contexts';
@@ -32,7 +33,7 @@ export default function CreateEvent({ navigation }) {
   };
 
   return (
-    <>
+    <ScrollView>
       <Input
         placeholder="Tittel"
         onChangeText={setName}
@@ -61,9 +62,9 @@ export default function CreateEvent({ navigation }) {
         placeholder="Antall plasser"
         onChangeText={setSlotsRemaining}
       />
-
-      <Button title="Create Event" type="solid" onPress={addEvent} />
-      <Button title="Back" type="solid" onPress={() => navigation.navigate('ListEvents')} />
-    </>
+      <View style={{flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Button containerStyle={{ marginBottom: 20 }} buttonStyle={{ backgroundColor: '#143642', width: 230, borderRadius: 40 }} titleStyle={{ color: '#C2E7D9' }} title="Create Event" type="solid" onPress={addEvent} />
+      </View>
+    </ScrollView>
   );
 }

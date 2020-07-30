@@ -51,7 +51,7 @@ export default function OrgLoginButton() {
           <Icon name="key" size={24} color="#C2E7D9" />
         }
       />
-      <Button buttonStyle={{backgroundColor: '#C2E7D9', borderRadius: 60, width: 260 }} titleStyle={{ color: '#143642' }} title="Logg inn" type="solid" onPress={() => authenticate()} />
+      <Button buttonStyle={{ backgroundColor: '#C2E7D9', borderRadius: 60, width: 260 }} titleStyle={{ color: '#143642' }} title="Logg inn" type="solid" onPress={() => authenticate()} />
     </View>
   );
 }

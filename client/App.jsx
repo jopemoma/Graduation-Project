@@ -15,6 +15,7 @@ import StackMyProfile from './components/stack/StackMyProfile';
 import FBLoginButton from './components/user/FBLoginButton';
 import { AuthContext, EventContext } from './contexts';
 
+console.disableYellowBox = true;
 
 const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
@@ -67,7 +68,7 @@ export default function App() {
                   },
                 })}
                 tabBarOptions={{
-                  activeTintColor: '#0F084B',
+                  activeTintColor: '#143642',
                   inactiveTintColor: 'gray',
                   activeBackgroundColor: '#C2E7D9',
                 }}

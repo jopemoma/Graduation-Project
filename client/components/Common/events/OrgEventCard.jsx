@@ -33,39 +33,34 @@ export default function OrgEventCard(props) {
           <Text style={{ color: 'green', marginBottom: 10 }}>
             {`Ledige plasser ${eventData.slotsRemaining}`}
           </Text>
-          <Button
-            buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
-            }}
-            onPress={() => navigation.navigate('ListVolunteers', { list: eventData.volunteers })}
-            title="Se deltagere"
-          />
-          <Button
-            buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
-            }}
-            title="Endre eventdetaljer"
-          />
-          <Button
-            buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5,
-            }}
-            onPress={() => navigation.navigate('ListVolunteers', {
-              list: eventData.pending,
-              accept: (id) => functions.handleVolunteer(id, acceptVolunteer),
-              reject: (id) => functions.handleVolunteer(id, rejectVolunteer),
-            })}
-            title="Se søkere"
-          />
-          <Button
-            buttonStyle={{
-              borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0,
-            }}
-            title="Slett arrangement"
-            onPress={() => {
-              functions.handleCancelEvent(eventData['_id']);
-            }}
-          />
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Button
+              buttonStyle={{ backgroundColor: '#143642', width: 230, borderRadius: 30 }}
+              titleStyle={{ color: '#C2E7D9' }}
+              containerStyle={{ marginBottom: 10 }}
+              onPress={() => navigation.navigate('ListVolunteers', { list: eventData.volunteers })}
+              title="Se deltagere"
+            />
+            <Button
+              buttonStyle={{ backgroundColor: '#143642', width: 230, borderRadius: 30 }}
+              containerStyle={{ marginBottom: 10 }}
+              titleStyle={{ color: '#C2E7D9' }}
+              onPress={() => navigation.navigate('ListVolunteers', {
+                list: eventData.pending,
+                accept: (id) => functions.handleVolunteer(id, acceptVolunteer),
+                reject: (id) => functions.handleVolunteer(id, rejectVolunteer),
+              })}
+              title="Se søkere"
+            />
+            <Button
+              buttonStyle={{ backgroundColor: '#143642', width: 230, borderRadius: 40 }}
+              titleStyle={{ color: '#C2E7D9' }}
+              title="Slett arrangement"
+              onPress={() => {
+                functions.handleCancelEvent(eventData['_id']);
+              }}
+            />
+          </View>
         </Card>
       </View>
     </ScrollView>

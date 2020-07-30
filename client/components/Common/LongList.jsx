@@ -15,10 +15,11 @@ export default function LongList({ navigation, navigateTo, list }) {
           key={li['_id']}
           title={`${li.orgName} - ${li.name}`}
           titleNumberOfLines={2}
+          titleStyle={{marginHorizontal: 15 }}
           image={{ uri: li.img }}
         >
 
-          <Text style={{ marginBottom: 10 }}>
+          <Text style={{ marginBottom: 10, marginLeft: 15 }}>
             {li.description}
           </Text>
           <View style={{
@@ -32,7 +33,7 @@ export default function LongList({ navigation, navigateTo, list }) {
                   borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#C2E7D9', width: 190,
                 }}
                 title="Ledige plasser!"
-                titleStyle={{ color: '#0E7C7B' }}
+                titleStyle={{ color: '#143642' }}
               />
               <Badge containerStyle={{ position: 'relative', left: 90, top: -45 }} value={li.slotsRemaining} status={li.slotsRemaining > 5 ? 'success' : 'warning'} />
             </View>

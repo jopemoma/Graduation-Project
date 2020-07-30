@@ -13,7 +13,7 @@ export default function StackMyEvents() {
       headerStyle: {
         backgroundColor: '#C2E7D9',
       },
-      headerTintColor: '#0F084B',
+      headerTintColor: '#143642',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
