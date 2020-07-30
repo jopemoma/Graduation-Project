@@ -22,19 +22,22 @@ export default function OrgLoginButton() {
         'Vennligst prøv igjen',
         [
           {
-            text: "Avbryt",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
+            text: 'Avbryt',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
           },
-          { text: "OK", onPress: () => console.log("OK Pressed") }
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
         ],
-        { cancelable: false }
+        { cancelable: false },
       );
     }
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#143642' }}>
+    <View style={{
+      flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#143642',
+    }}
+    >
       <Input
         placeholder="Brukernavn"
         onChangeText={setUsername}
