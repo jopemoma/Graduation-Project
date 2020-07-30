@@ -28,6 +28,7 @@ export default function ShortList({
           roundAvatar
           title={li.name}
           leftAvatar={{ source: { uri: li.img } }}
+          rightSubtitle="Se detaljer ->"
           onPress={() => navigation.navigate(navigateTo, { li })}
           rightElement={accept ? (
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>

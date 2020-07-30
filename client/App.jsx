@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from './components/common/Home';
 import OrgLoginButton from './components/organization/OrgLoginButton';
 import StackListEvents from './components/stack/StackListEvents';
@@ -14,6 +14,7 @@ import StackMyEvents from './components/stack/StackMyEvents';
 import StackMyProfile from './components/stack/StackMyProfile';
 import FBLoginButton from './components/user/FBLoginButton';
 import { AuthContext, EventContext } from './contexts';
+
 
 const Tab = createBottomTabNavigator();
 const LoginStack = createStackNavigator();
@@ -85,7 +86,25 @@ export default function App() {
         <AuthContext.Provider value={authContext}>
           <EventContext.Provider value={eventContext}>
             <NavigationContainer>
-              <Tab.Navigator>
+              <Tab.Navigator
+                screenOptions={({ route }) => ({
+                  tabBarIcon: ({ focused, color, size }) => {
+                    if (route.name === 'TabOrgListEvents') {
+                      return (
+                        <MaterialIcons name="event-available" size={size} color={color} />
+                      );
+                    }
+                    return (
+                      <MaterialCommunityIcons name="account-edit" size={size} color={color} />
+                    );
+                  },
+                })}
+                tabBarOptions={{
+                  activeTintColor: '#C2E7D9',
+                  inactiveTintColor: 'gray',
+                  activeBackgroundColor: '#143642',
+                }}
+              >
                 <Tab.Screen name="TabOrgListEvents" component={StackOrgListEvents} options={{ title: 'Arrangementer' }} />
                 <Tab.Screen name="TabOrgCreateEvent" component={StackOrgCreateEvent} options={{ title: 'Ny oppføring' }} />
               </Tab.Navigator>
@@ -111,7 +130,7 @@ export default function App() {
         >
           <LoginStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <LoginStack.Screen name="LoginUser" component={FBLoginButton} options={{ title: 'Logg  inn med FaceBook', headerTitleAlign: 'center' }} />
-          <LoginStack.Screen name="LoginOrganisation" component={OrgLoginButton} />
+          <LoginStack.Screen name="LoginOrganisation" component={OrgLoginButton} options={{ title: 'Logg  som administrator', headerTitleAlign: 'center', headerStyle: { backgroundColor: '#143642' }, headerTintColor: '#C2E7D9' }} />
         </LoginStack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

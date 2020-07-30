@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { View, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
 import { authenticateUser } from '../../backend';
@@ -16,28 +17,41 @@ export default function OrgLoginButton() {
       userStateContext.setIsUserStatus(false);
       userStateContext.setOrgId(authData.organizationId);
     } else {
-      // TODO display error message to user
-      console.log('Wrong password or username');
+      Alert.alert(
+        'Feil brukernavn/passord',
+        'Vennligst prøv igjen',
+        [
+          {
+            text: "Avbryt",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
     }
   };
 
   return (
-    <>
+    <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#143642' }}>
       <Input
         placeholder="Brukernavn"
         onChangeText={setUsername}
-        leftIcon={{ type: 'font-awesome', name: 'user' }}
+        inputStyle={{ color: 'white' }}
+        leftIcon={{ type: 'font-awesome', name: 'user', color: '#C2E7D9' }}
       />
 
       <Input
         placeholder="Passord"
         secureTextEntry
         onChangeText={setPassword}
+        inputStyle={{ color: 'white' }}
         leftIcon={
-          <Icon name="key" size={24} color="black" />
+          <Icon name="key" size={24} color="#C2E7D9" />
         }
       />
-      <Button title="Logg inn" type="solid" onPress={() => authenticate()} />
-    </>
+      <Button buttonStyle={{backgroundColor: '#C2E7D9', borderRadius: 60, width: 260 }} titleStyle={{ color: '#143642' }} title="Logg inn" type="solid" onPress={() => authenticate()} />
+    </View>
   );
 }

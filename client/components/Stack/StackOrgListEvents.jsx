@@ -9,7 +9,16 @@ import Profile from '../user/Profile';
 export default function StackOrgListEvents() {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#143642',
+      },
+      headerTintColor: '#C2E7D9',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}
+    >
       <Stack.Screen name="ListEvents" options={{ title: 'Dine Arrangementer', headerTitleAlign: 'center' }}>
         { (props) => <ListEvents {...props} type="short" /> }
       </Stack.Screen>
