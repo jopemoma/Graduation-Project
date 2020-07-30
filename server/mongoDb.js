@@ -9,6 +9,23 @@ require('dotenv').config();
 const userName = process.env.USERNAME;
 const password = process.env.PASSWORD;
 
+/* HELPER FUNCTIONS */
+
+function processUserDataObject(obj) {
+  const {
+    _id, facebookId, name, email,
+  } = obj;
+  return {
+    _id,
+    facebookId,
+    name,
+    email,
+    img: obj.picture.data.url,
+  };
+}
+
+/*  MAIN FUNCTIONS */
+
 function connect() {
   mongoose.connect(`mongodb+srv://${userName}:${password}@cluster0.1oydg.mongodb.net/BidraSammen?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
   const db = mongoose.connection;
@@ -36,8 +53,7 @@ async function deleteEvent(_id) {
 }
 
 async function fetchUser(facebookId) {
-  const res = await User.findOne({ facebookId });
-  return res;
+  return processUserDataObject(await User.findOne({ facebookId }));
 }
 
 async function isUser(id) {

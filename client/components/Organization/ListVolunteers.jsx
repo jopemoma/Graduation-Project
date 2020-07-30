@@ -9,7 +9,7 @@ import LongList from '../common/LongList';
 import ShortList from '../common/ShortList';
 
 export default function ListVolunteers({ route, navigation, type }) {
-  const [userNameState, setUserNameState] = useState([{ _id: '1', name: 'Laster...', img: '' }]);
+  const [userNameState, setUserNameState] = useState([{ _id: '1', name: 'Laster...', img: 'https://imgur.com/gallery/AizUHEf.jpg' }]);
   const { accept, reject } = route.params;
 
   useFocusEffect(

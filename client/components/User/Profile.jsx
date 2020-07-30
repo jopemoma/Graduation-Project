@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Avatar } from 'react-native-elements';
 import { fetchUser } from '../../backend';
 
-export default function Profile({ route, navigation }) {
+export default function Profile({ route }) {
   const [profileState, setProfileState] = useState(null);
   const userId = route.params.facebookId;
 
@@ -27,7 +27,7 @@ export default function Profile({ route, navigation }) {
           containerStyle={{ marginBottom: 25 }}
           rounded
           size={260}
-          source={{ uri: profileState.picture.data.url }}
+          source={{ uri: profileState.img }}
         />
         <Text style={{
           marginBottom: 10, fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: 33,
