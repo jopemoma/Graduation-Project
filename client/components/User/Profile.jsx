@@ -6,7 +6,7 @@ import { fetchUser } from '../../backend';
 
 export default function Profile({ route }) {
   const [profileState, setProfileState] = useState(null);
-  const userId = route.params.facebookId;
+  const userId = route.params.li.facebookId;
 
   useEffect(() => {
     async function get() {

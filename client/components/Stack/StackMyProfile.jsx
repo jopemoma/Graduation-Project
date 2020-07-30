@@ -21,7 +21,7 @@ export default function StackMyEvents() {
     >
       <Stack.Screen name="Profile" options={{ title: 'Min profil', headerTitleAlign: 'center' }}>
         {
-        (props) => <Profile {...props} route={{ params: { facebookId: userStateContext.userId } }} />
+        (props) => <Profile {...props} route={{ params: { li: { facebookId: userStateContext.userId } } }} />
         }
       </Stack.Screen>
     </Stack.Navigator>
