@@ -2,6 +2,7 @@
 import React, {
   useEffect, useContext, useState,
 } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
 import { fetchEvents, fetchOrgEvent } from '../../../backend';
 import { EventContext, AuthContext } from '../../../contexts';
@@ -14,13 +15,15 @@ export default function ListEvents({ navigation, type }) {
 
   const [eventList, setEventList] = useState(null);
 
-  useEffect(() => {
-    if (userStateContext.isUser) {
-      fetchEvents([eventStateContext.setEventState, setEventList]);
-    } else {
-      fetchOrgEvent(userStateContext.orgId, setEventList);
-    }
-  }, [eventStateContext.eventState]);
+  useFocusEffect(
+    React.useCallback(() => {
+      if (userStateContext.isUser) {
+        fetchEvents([eventStateContext.setEventState, setEventList]);
+      } else {
+        fetchOrgEvent(userStateContext.orgId, setEventList);
+      }
+    }, []),
+  );
 
   if (!eventList) return null;
   if (!eventStateContext.eventState) return null;
@@ -28,7 +31,7 @@ export default function ListEvents({ navigation, type }) {
   return (
     <ScrollView>
       {type === 'short'
-        ? <ShortList headline="Arrangementer i ditt område" list={eventList} navigation={navigation} navigateTo="Event" />
+        ? <ShortList headline="Arrrangementer" list={eventList} navigation={navigation} navigateTo="Event" />
         : <LongList list={eventList} navigation={navigation} navigateTo="Event" />}
     </ScrollView>
   );
