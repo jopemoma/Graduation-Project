@@ -68,6 +68,7 @@ export default function App() {
                 tabBarOptions={{
                   activeTintColor: '#0F084B',
                   inactiveTintColor: 'gray',
+                  activeBackgroundColor: '#C2E7D9',
                 }}
               >
                 <Tab.Screen name="TabListEvents" component={StackListEvents} options={{ title: 'Arrangementer' }} />
