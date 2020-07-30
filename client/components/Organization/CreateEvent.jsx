@@ -9,6 +9,7 @@ export default function CreateEvent({ navigation }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [img, setImg] = useState('');
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
   const [slotsRemaining, setSlotsRemaining] = useState('');
@@ -18,6 +19,7 @@ export default function CreateEvent({ navigation }) {
       name,
       organizationId: userStateContext.orgId,
       description,
+      img,
       location,
       time,
       date,
@@ -38,6 +40,10 @@ export default function CreateEvent({ navigation }) {
       <Input
         placeholder="Beskrivelse"
         onChangeText={setDescription}
+      />
+      <Input
+        placeholder="Bilde"
+        onChangeText={setImg}
       />
       <Input
         placeholder="Sted"

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, {
-  useEffect, useContext, useState,
+  useContext, useState,
 } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
@@ -22,7 +22,7 @@ export default function ListEvents({ navigation, type }) {
       } else {
         fetchOrgEvent(userStateContext.orgId, setEventList);
       }
-    }, []),
+    }),
   );
 
   if (!eventList) return null;
