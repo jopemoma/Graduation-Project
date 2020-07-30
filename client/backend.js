@@ -1,6 +1,6 @@
 import { ip } from './ip.json';
 
-const ipAdress = `http://${ip}:3000`;
+const ipAdress = ip;
 
 const authenticateOptions = (username, password) => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
 const options = (data, method) => ({
