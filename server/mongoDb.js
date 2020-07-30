@@ -1,12 +1,30 @@
+/* eslint-disable dot-notation */
 const mongoose = require('mongoose');
 const { User } = require('./schema/userSchema');
-const { Event } = require('./schema/eventSchema');
+const { Event, EventDeleted } = require('./schema/eventSchema');
 const { Orgs } = require('./schema/orgsSchema');
 const { Cred } = require('./schema/credSchema');
 require('dotenv').config();
 
 const userName = process.env.USERNAME;
 const password = process.env.PASSWORD;
+
+/* HELPER FUNCTIONS */
+
+function processUserDataObject(obj) {
+  const {
+    _id, facebookId, name, email,
+  } = obj;
+  return {
+    _id,
+    facebookId,
+    name,
+    email,
+    img: obj.picture.data.url,
+  };
+}
+
+/*  MAIN FUNCTIONS */
 
 function connect() {
   mongoose.connect(`mongodb+srv://${userName}:${password}@cluster0.1oydg.mongodb.net/BidraSammen?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,23 +35,74 @@ function connect() {
   });
 }
 
-function createUser(id, name) {
-  const newUser = new User({ facebookId: id, name });
+function createUser(data) {
+  const newUser = new User({ facebookId: data.id, ...data });
   newUser.save((err) => {
     if (err) return false;
     return true;
   });
 }
 
-async function isUser(facebookId) {
-  const res = await User.exists({ facebookId });
+async function deleteEvent(_id) {
+  const event = await Event.findOne({ _id });
+  const swap = new EventDeleted(event);
+  swap['_id'] = mongoose.Types.ObjectId();
+  swap.isNew = true;
+  await swap.save();
+  await event.remove();
+}
+
+async function fetchUser(facebookId) {
+  return processUserDataObject(await User.findOne({ facebookId }));
+}
+
+async function isUser(id) {
+  const res = await User.exists({ facebookId: id });
   return res;
 }
 
-// Filter === {} \\ { organizationId: x }
 async function fetchEvents(filter = {}) {
   const res = await Event.find(filter);
   return res;
+}
+
+async function handleVolunteer(eventId, body) {
+  switch (body.action) {
+    case 'accept': {
+      const res = await Event.findOneAndUpdate(eventId, {
+        $pull: { pending: body.facebookId },
+        $push: { volunteers: body.facebookId },
+        $inc: { slotsRemaining: -1 },
+      }, { new: true });
+      return res;
+    }
+    case 'reject': {
+      const res = await Event.findOneAndUpdate(eventId, {
+        $push: { rejected: body.facebookId },
+        $pull: { pending: body.facebookId },
+      }, { new: true });
+      return res;
+    }
+    case 'remove': {
+      const eventData = await Event.findOne(eventId);
+      if (eventData.volunteers.includes(body.facebookId)) {
+        const res = Event.findOneAndUpdate(eventId, {
+          $pull: { volunteers: body.facebookId },
+          $inc: { slotsRemaining: +1 },
+        }, { new: true });
+        return res;
+      } if (eventData.pending.includes(body.facebookId)) {
+        const res = Event.findOneAndUpdate(eventId, {
+          $pull: { pending: body.facebookId },
+        }, { new: true });
+        return res;
+      }
+      return eventData;
+    }
+    default:
+      console.log('Oops. Default case in handleVolunteer.');
+      return null;
+  }
 }
 
 async function fetchOrgs() {
@@ -57,20 +126,23 @@ async function createEvent(eventData) {
   return res;
 }
 
-async function addVolunteer(eventId, eventData) {
+async function addPending(eventId, eventData) {
   // eslint-disable-next-line max-len
-  const res = await Event.findOneAndUpdate(eventId, { $push: { volunteers: eventData }, $inc: { slotsRemaining: -1 } }, { new: true });
+  const res = await Event.findOneAndUpdate(eventId, { $push: { pending: eventData } }, { new: true });
   return res;
 }
 
 module.exports = {
   connect,
   createUser,
+  fetchUser,
   isUser,
   fetchEvents,
   fetchOrgs,
   fetchOrg,
   authenticate,
   createEvent,
-  addVolunteer,
+  addPending,
+  handleVolunteer,
+  deleteEvent,
 };

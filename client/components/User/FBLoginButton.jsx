@@ -1,27 +1,25 @@
-import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   TouchableOpacity,
 } from 'react-native';
+import React, { useState, useContext } from 'react';
 import * as Facebook from 'expo-facebook';
-import { AuthContext } from '../contexts';
-import { updateUser } from '../backend';
+import { AuthContext } from '../../contexts';
+import { createUser } from '../../backend';
 
 const appId = '1167950023585231';
-const imgSrc = require('../assets/icon.png');
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e9ebee',
+    backgroundColor: '#C2E7D9',
     alignItems: 'center',
     justifyContent: 'center',
   },
   loginBtn: {
-    backgroundColor: '#4267b2',
+    backgroundColor: '#143642',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
@@ -38,8 +36,8 @@ const styles = StyleSheet.create({
 
 export default function FBLoginButton() {
   const userStateContext = useContext(AuthContext);
+  // eslint-disable-next-line no-unused-vars
   const [userData, setUserData] = useState(null);
-  const [isImageLoading, setImageLoadStatus] = useState(false);
 
   const facebookLogIn = async () => {
     await Facebook.initializeAsync(appId);
@@ -48,37 +46,29 @@ export default function FBLoginButton() {
       if (type === 'success') {
         fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
           .then((response) => response.json())
-          .then((data) => {
-            updateUser(data.id, data.name);
+          .then(async (data) => {
+            setUserData(data);
+            await createUser(data);
             userStateContext.setUserId(data.id);
             userStateContext.setLoggedinStatus(true);
-            setUserData(data);
           })
-          .catch((e) => console.log(e));
-      } else {
-        // type === 'cancel'
+          .catch((e) => console.error(e));
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
   };
-
-  const logout = () => {
-    userStateContext.setLoggedinStatus(false);
-    setUserData(null);
-    setImageLoadStatus(false);
-  };
-
   return (
     <View style={styles.container}>
-      <Image
-        style={{
-          width: 200, height: 200, borderRadius: 50, marginVertical: 20,
-        }}
-        source={imgSrc}
-      />
+      <Text style={{
+        fontFamily: 'sans-serif', fontSize: 55, color: '#143642', fontWeight: 'bold', marginLeft: 60, marginTop: -160,
+      }}
+      >
+        BIDRA. SAMMEN.
+      </Text>
+      <Text style={{ marginBottom: 100, fontSize: 18 }}>Appen som gjør det enklere å bidra</Text>
       <TouchableOpacity style={styles.loginBtn} onPress={facebookLogIn}>
-        <Text style={{ color: '#fff' }}>Login with Facebook</Text>
+        <Text style={{ color: '#C2E7D9' }}>Logg inn med facebook</Text>
       </TouchableOpacity>
     </View>
   );

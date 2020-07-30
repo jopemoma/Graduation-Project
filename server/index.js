@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 const express = require('express');
 const db = require('./mongoDb');
 
@@ -15,13 +16,21 @@ app.get('/events', async (req, res) => {
   res.json(await db.fetchEvents());
 });
 
-// TODO: Error testing -- making sure :id is correct and the update was successful.
 app.post('/events/:_id', async (req, res) => {
-  res.json(await db.addVolunteer(req.params, req.body.userId));
+  res.json(await db.addPending(req.params, req.body.userId));
 });
 
 app.post('/events', async (req, res) => {
   res.json(await db.createEvent(req.body));
+});
+
+app.put('/events/:_id', async (req, res) => {
+  res.json(await db.handleVolunteer(req.params, req.body));
+});
+
+app.delete('/events/:_id', async (req, res) => {
+  await db.deleteEvent(req.params);
+  res.sendStatus(200);
 });
 
 /* ------------------------------- ORGS ------------------------------- */
@@ -41,12 +50,18 @@ app.get('/orgs/:organizationId/events', async (req, res) => {
 
 /* ------------------------------- USERS ------------------------------- */
 
+app.get('/users/:facebookId', async (req, res) => {
+  if (db.isUser(req.params.facebookId)) {
+    return res.send(await db.fetchUser(req.params.facebookId));
+  }
+  return res.sendStatus(404);
+});
+
 app.post('/users', async (req, res) => {
-  const { facebookId, name } = req.body;
-  if (db.isUser(facebookId)) {
+  if (await db.isUser(req.body.id)) {
     return res.sendStatus(200);
   }
-  db.createUser(facebookId, name);
+  db.createUser(req.body);
   return res.sendStatus(201);
 });
 

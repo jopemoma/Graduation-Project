@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Bidra_Sammen",
-    "slug": "Bidra_Sammen",
+    "name": "Bidra_Sammen_app",
+    "slug": "bidra_sammen_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }
