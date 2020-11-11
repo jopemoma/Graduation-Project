@@ -17,6 +17,16 @@
   <img width="230" src="https://i.imgur.com/Uvh5pgl.png" />
 </p>
 
+<br>
+
+## Team
+
+<p align="center">
+<a href="https://github.com/jopemoma"><img width="100" src="https://avatars1.githubusercontent.com/u/52753718?s=460&u=0ee502982aee22b16ce9121593bca7443c37d4aa&v=4"></a> 
+<a href="https://github.com/bragerosberg"><img width="100" src="https://avatars3.githubusercontent.com/u/64463510?s=460&u=29babf06b95992e7a345106b7c79047528ce7981&v=4"></a>
+<a href="https://github.com/oyvind-ege"><img width="100" src="https://avatars3.githubusercontent.com/u/59258583?s=460&u=a6c59c1ae740a71f4a514048024172a0107eea39&v=4"></a> 
+<a href="https://github.com/martinostvik"><img width="100" src="https://avatars1.githubusercontent.com/u/57357767?s=460&u=002a373b3c3a77167ed81f17a2491e5a7b31f353&v=4"></a> 
+</p>
 
 ## Features
 
