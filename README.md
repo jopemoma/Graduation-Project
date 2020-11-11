@@ -10,6 +10,15 @@
 
 <p align="center">Bidra Sammen was our final graduation project from SALT's intensive fullstack developer course.</p>
 
+<p>
+  <img width="250" src="https://i.imgur.com/9IcDmxN.png" />
+  <img width="220" src="https://i.imgur.com/21LaA9C.png" />
+  <img width="208" src="https://i.imgur.com/GVxcCj2.png" />
+  <img width="230" src="https://i.imgur.com/ltRbTWR.png" />
+</p>
+
+
+
 
 
   
