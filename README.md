@@ -18,11 +18,18 @@
 </p>
 
 
+## Features
 
+**Administrators**
+* Unique login
+* Create event, Delete event
+* View participant applications, including their profile photo
+* Reject or accept participants
+* View confirmed participants
 
-
-  
-
-
-
-
+**Users**
+* Login using facebook
+* View all events
+* Apply for event
+* Withdraw application
+* See list of confirmed and pending applications
