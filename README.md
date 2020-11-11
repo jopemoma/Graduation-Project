@@ -8,7 +8,7 @@
   <a href="https://www.mongodb.org/" title="MongoDB"><img src="https://github.com/tomchen/stack-icons/blob/master/logos/mongodb-icon.svg" alt="MongoDB" width="48px" height="48px">   </a>
 </p>  
 
-<p align="center">Bidra Sammen was our final graduation project from SALT's intensive fullstack developer course.</p>
+<p align="center">Bidra Sammen (Norwegian for "Contribute Together") was our final graduation project from <a href="https://salt.dev/">SALT's intensive fullstack developer course.</a></p>
 
 <p>
   <img width="250" src="https://i.imgur.com/9IcDmxN.png" />
@@ -22,7 +22,8 @@
 
 **Administrators**
 * Unique login
-* Create event, Delete event
+* Create event
+* Delete event
 * View participant applications, including their profile photo
 * Reject or accept participants
 * View confirmed participants
